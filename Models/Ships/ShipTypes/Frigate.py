@@ -1,4 +1,4 @@
-from ShipTypes import ShipType
+import ShipType
 
 
 class Frigate(ShipType):

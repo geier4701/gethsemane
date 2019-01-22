@@ -7,7 +7,7 @@ class TrackingStyle(Enum):
 	PASSIVE = 2
 
 
-class RadarClass(ABC):
+class Radar(ABC):
 	tracking_style: TrackingStyle
 	power_consumption: int
 	mass: int
