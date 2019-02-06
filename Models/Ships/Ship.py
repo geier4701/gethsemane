@@ -6,7 +6,7 @@ from Computers import Computer
 
 
 class Ship:
-	s_class: ShipType
+	size: ShipType
 	armament: []
 	crew: []
 	radar: Radar
@@ -19,17 +19,9 @@ class Ship:
 	max_energy: int
 	current_energy: int
 	
-	def __init__(self, s_class, sh_class, armament, crew, r_class, j_class, i_class, c_class):
-		self.ship_class = s_class
-		self.shield_class = sh_class
-		self.armament = armament
-		self.crew = crew
-		self.radar = r_class
-		self.drive_class = j_class
-		self.impulse_class = i_class
-		self.cpu_class = c_class
+	def __init__(self):
 		self.location = Location(0, 0, 0)
-		self.impulse_speed = 0
+		self.current_velocity = 0
 	
 	def jump_move(self, coord):
 		if self.current_energy >= self.jump_drive.jump_cost:
@@ -38,7 +30,6 @@ class Ship:
 			return True
 		else:
 			return False
-		pass
 	
 	def impulse_move(self, velocity_change):
 		# ALTER VELOCITY/DIRECTION
