@@ -1,4 +1,4 @@
-from Drives.ImpulseEngine import ImpulseDrive
+from ImpulseEngine import ImpulseDrive
 
 
 class Cavalier(ImpulseDrive):

@@ -1,4 +1,4 @@
-from Drives.JumpDrive import JumpDrive
+from JumpDrive import JumpDrive
 
 
 class SP500(JumpDrive):

@@ -1,0 +1,13 @@
+from Component import Component
+
+
+class Computer(Component):
+	speed: int
+	capacity: int
+	
+	def __init__(self, id: int, name: str, mass:int, speed: int, capacity: int):
+		self.id = id
+		self.name = name
+		self.mass = mass
+		self.speed = speed
+		self.capacity = capacity

@@ -1,19 +1,22 @@
 import Ship
-from ShipTypes import Frigate
+from ShipType import ShipType
+from repos import ComponentFetcher
 from UI.ValidUserInput import validate_list_input
 
 
 def get_type(ship: Ship):
 	valid = False
-	s_class: str
+	user_choice: str
+	
+	ship_types = ComponentFetcher.get_components(ShipType)
 	
 	while not valid:
 		print("Choose a ship size")
-		print("1) Frigate")
-		s_class = input()
-		valid = validate_list_input(1, s_class)
+		for ship in ship_types:
+			print(f"{ship.id}) {ship.name} - {ship.mass} tonnes")
+		user_choice = input()
+		valid = validate_list_input(ship_types.count(), user_choice)
 	
-	if s_class == "1":
-		ship.s_class = Frigate
+	ship.s_class = ship_types[user_choice]
 	
 	return ship

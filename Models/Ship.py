@@ -1,8 +1,9 @@
 from Location import Location
-from Scanners.Radar import Radar
+from Radar import Radar
 import ShipType
-from Drives import JumpDrive, ImpulseEngine
-from Computers import Computer
+import JumpDrive
+import ImpulseEngine
+import Computer
 
 
 class Ship:

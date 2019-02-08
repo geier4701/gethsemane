@@ -1,6 +1,6 @@
 import os
 
-from ShipFactory import ShipFactory
+from BLL.ShipFactory import ShipFactory
 from UI.ValidUserInput import validate_list_input
 
 
