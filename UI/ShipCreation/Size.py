@@ -1,5 +1,4 @@
-import Ship
-from ShipType import ShipType
+from Models import Ship, ShipType
 from repos import ComponentFetcher
 from UI.ValidUserInput import validate_list_input
 

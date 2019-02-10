@@ -1,9 +1,4 @@
-from Location import Location
-from Radar import Radar
-import ShipType
-import JumpDrive
-import ImpulseEngine
-import Computer
+from Models import Computer, ShipType, Radar, JumpDrive, ImpulseEngine, Location
 
 
 class Ship:
@@ -21,7 +16,7 @@ class Ship:
 	current_energy: int
 	
 	def __init__(self):
-		self.location = Location(0, 0, 0)
+		self.location = Location.Location(0, 0, 0)
 		self.current_velocity = 0
 	
 	def jump_move(self, coord):

@@ -1,4 +1,4 @@
-from Component import Component
+from Models.Component import Component
 
 
 class ShipType(Component):

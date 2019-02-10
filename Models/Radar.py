@@ -1,5 +1,5 @@
 from enum import Enum
-from Component import Component
+from Models.Component import Component
 
 
 class TrackingStyle(Enum):

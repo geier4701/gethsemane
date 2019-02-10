@@ -1,4 +1,4 @@
-from Component import Component
+from Models import Component
 
 
 def get_components(component_type: Component):
