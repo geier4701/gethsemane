@@ -1,9 +1,9 @@
+import ImpulseEngine
+from Computer import Computer
+from JumpDrive import JumpDrive
 from Location import Location
 from Radar import Radar
-import ShipType
-import JumpDrive
-import ImpulseEngine
-import Computer
+from ShipType import ShipType
 
 
 class Ship:

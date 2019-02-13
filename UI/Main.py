@@ -1,6 +1,7 @@
 import os
 
 from BLL.ShipFactory import ShipFactory
+from UI.Loaders import load_ship
 from UI.ValidUserInput import validate_list_input
 
 
@@ -24,8 +25,9 @@ def main():
 			factory.create_ship()
 
 		if user_choice == 2:
-			# do something
-			pass
+			os.system('cls')
+			ship = load_ship()
+		
 		if user_choice == 3:
 			running = False
 	
