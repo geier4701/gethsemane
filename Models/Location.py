@@ -1,5 +1,5 @@
 class Location:
 	coord: []
 	
-	def __init__(self, x, y, z):
-		coord = [x, y, z]
+	def __init__(self, x: int, y: int, z: int):
+		self.coord = [x, y, z]

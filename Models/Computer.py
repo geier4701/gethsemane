@@ -1,4 +1,4 @@
-from Component import Component
+from Models.Component import Component
 
 
 class Computer(Component):
@@ -11,3 +11,6 @@ class Computer(Component):
 		self.mass = mass
 		self.speed = speed
 		self.capacity = capacity
+	
+	def get_stat_info(self):
+		pass

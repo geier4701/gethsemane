@@ -1,4 +1,4 @@
-from Component import Component
+from Models.Component import Component
 
 
 class JumpDrive(Component):
@@ -9,3 +9,6 @@ class JumpDrive(Component):
 		self.name = name
 		self.mass = mass
 		self.jump_cost = jump_cost
+	
+	def get_stat_info(self):
+		pass

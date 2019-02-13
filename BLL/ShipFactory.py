@@ -4,7 +4,6 @@ from repos.ComponentFetcher import ComponentFetcher
 
 class ShipFactory:
 	def create_ship(self):
-		# PASS THE SHIP AROUND AS THINGS ARE ADDED
 		fetcher = ComponentFetcher()
 		created_ship = Ship()
 		

@@ -2,11 +2,7 @@ import os
 from typing import Dict
 
 import ImpulseEngine
-from Component import Component
-from Computer import Computer
-from JumpDrive import JumpDrive
-from Radar import Radar
-from Ship import Ship
+from Models import Component, Computer, JumpDrive, Radar
 from ShipType import ShipType
 from UI.ValidUserInput import validate_list_input
 
@@ -48,7 +44,6 @@ class ComponentFetcher:
 			os.system('cls')
 			print("Select your " + component_type)
 			
-			component: Component
 			for component in components:
 				stat_info = component.get_stat_info()
 				for stat in stat_info:

@@ -21,8 +21,8 @@ def main():
 		
 		if user_choice == 1:
 			os.system('cls')
-			factory = ShipFactory()
-			factory.create_ship()
+			ship_factory = ShipFactory()
+			ship_factory.create_ship()
 
 		if user_choice == 2:
 			os.system('cls')

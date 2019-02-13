@@ -32,3 +32,6 @@ class Weapon(Component):
 	
 	def fire(self):
 		pass
+
+	def get_stat_info(self):
+		pass

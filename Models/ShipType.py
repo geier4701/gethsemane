@@ -1,4 +1,4 @@
-from Component import Component
+from Models.Component import Component
 
 
 class ShipType(Component):
@@ -6,3 +6,6 @@ class ShipType(Component):
 		self.id = id
 		self.name = name
 		self.mass = mass
+	
+	def get_stat_info(self):
+		pass

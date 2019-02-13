@@ -1,5 +1,5 @@
 from enum import Enum
-from Component import Component
+from Models.Component import Component
 
 
 class TrackingStyle(Enum):
@@ -22,4 +22,7 @@ class Radar(Component):
 		# CHECK ENERGY
 		# DRAIN ENERGY
 		# PING OTHER SHIP FOR POSITION
+		pass
+	
+	def get_stat_info(self):
 		pass

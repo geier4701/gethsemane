@@ -1,4 +1,4 @@
-from Component import Component
+from Models.Component import Component
 
 
 class ImpulseDrive(Component):
@@ -9,6 +9,9 @@ class ImpulseDrive(Component):
 		self.name = name
 		self.mass = mass
 		self.max_accel = max_accel
+	
+	def get_stat_info(self):
+		pass
 
 # a few ways to go about it. 1. no generating power. All  battery operated ships, ensuring that they need to manage
 # energy as a resource. 2. power generation tied to ship class. You don't get to pick how much power is generated a
