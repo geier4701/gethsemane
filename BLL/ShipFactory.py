@@ -4,11 +4,11 @@ from repos.ComponentFetcher import ComponentFetcher
 
 class ShipFactory:
 	def create_ship(self):
-		fetcher = ComponentFetcher()
 		created_ship = Ship()
 		
-		selected_component = fetcher.select_component("ShipType")
-		created_ship[selected_component.name] = selected_component
+		type_fetcher = ComponentFetcher("ShipType")
+		selected_component = type_fetcher.select_component()
+		created_ship.size = selected_component
 		
 		print("Choose an impulse engine")
 		print("1) Cavalier - zoom!")

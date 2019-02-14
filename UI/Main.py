@@ -8,7 +8,7 @@ from UI.ValidUserInput import validate_list_input
 def main():
 	running = True
 	
-	def start():
+	while running:
 		valid = False
 		user_choice: str
 		
@@ -19,17 +19,16 @@ def main():
 			user_choice = input()
 			valid = validate_list_input(3, user_choice)
 		
-		if user_choice == 1:
+		if user_choice is "1":
 			os.system('cls')
 			ship_factory = ShipFactory()
 			ship_factory.create_ship()
-
-		if user_choice == 2:
+		elif user_choice is "2":
 			os.system('cls')
 			ship = load_ship()
-		
-		if user_choice == 3:
+		elif user_choice is "3":
 			running = False
-	
-	while running:
-		start()
+
+
+if __name__ == '__main__':
+	main()

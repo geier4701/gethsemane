@@ -1,5 +1,6 @@
 import os
 from typing import Dict
+from pathlib import Path
 
 import ImpulseEngine
 from Models import Component, Computer, JumpDrive, Radar
@@ -16,36 +17,42 @@ class ComponentFetcher:
 		"JumpDrive": {"path": "JumpDrives.txt", "component_class": JumpDrive},
 		"Radar": {"path": "Radars.txt", "component_class": Radar}
 	}
+	component_type: str
 	
-	def get_components(self, component_type: str):
+	def __init__(self, component_type: str):
+		self.component_type = component_type
+	
+	def get_components(self):
 		components: Dict[int, Component] = {}
 		
-		fhand = open(self.component_library[component_type]["path"])
+		repo_folder = Path(os.path.dirname(__file__))
+		# contents = repo_folder / self.component_library[self.component_type]["path"]
+		fhand = open(repo_folder / self.component_library[self.component_type]["path"])
 		
 		for line in fhand:
 			stats = line.split(",")
-			to_add = self.component_library[component_type]["component_class"](*stats)
+			to_add = self.component_library[self.component_type]["component_class"](*stats)
 			components[to_add.id] = to_add
 		
 		return components
 	
-	def get_component(self, component_type: str, id: int):
-		components = self.get_components(component_type)
+	def get_component(self, id: int):
+		components = self.get_components()
 		
 		return components[id]
 	
-	def select_component(self, component_type: str):
+	def select_component(self):
 		valid = False
 		user_choice: str
 		
-		components = self.get_components(component_type)
+		components = self.get_components()
 		
 		while not valid:
 			os.system('cls')
-			print("Select your " + component_type)
+			print("Select your " + self.component_type)
 			
 			for component in components:
-				stat_info = component.get_stat_info()
+				stat_info = components[component].get_stat_info()
 				for stat in stat_info:
 					print(f"{stat['name']}) - {stat['value']}")
 				
