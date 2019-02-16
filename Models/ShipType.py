@@ -8,4 +8,8 @@ class ShipType(Component):
 		self.mass = mass
 	
 	def get_stat_info(self):
-		pass
+		return {
+			'id': self.id,
+			'name': self.name,
+			'mass': self.mass
+		}

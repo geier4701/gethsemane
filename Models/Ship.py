@@ -3,8 +3,9 @@ from Models import Computer, ShipType, Radar, JumpDrive, ImpulseEngine, Location
 
 class Ship:
 	size: ShipType
-	armament: []
-	crew: []
+	armament: {}
+	crew: {}
+	subroutines: []
 	radar: Radar
 	jump_drive: JumpDrive
 	impulse_engine: ImpulseEngine

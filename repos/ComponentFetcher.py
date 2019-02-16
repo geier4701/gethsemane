@@ -17,44 +17,40 @@ class ComponentFetcher:
 		"JumpDrive": {"path": "JumpDrives.txt", "component_class": JumpDrive},
 		"Radar": {"path": "Radars.txt", "component_class": Radar}
 	}
-	component_type: str
 	
-	def __init__(self, component_type: str):
-		self.component_type = component_type
-	
-	def get_components(self):
+	def get_components(self, component_type: str):
 		components: Dict[int, Component] = {}
 		
 		repo_folder = Path(os.path.dirname(__file__))
-		# contents = repo_folder / self.component_library[self.component_type]["path"]
-		fhand = open(repo_folder / self.component_library[self.component_type]["path"])
+		file = open(repo_folder / self.component_library[component_type]["path"])
 		
-		for line in fhand:
+		for line in file:
 			stats = line.split(",")
-			to_add = self.component_library[self.component_type]["component_class"](*stats)
+			to_add = self.component_library[component_type]["component_class"](*stats)
 			components[to_add.id] = to_add
+		
+		file.close()
 		
 		return components
 	
-	def get_component(self, id: int):
-		components = self.get_components()
+	def get_component(self, id: int, component_type: str):
+		components = self.get_components(component_type)
 		
 		return components[id]
 	
-	def select_component(self):
+	def select_component(self, component_type: str):
 		valid = False
 		user_choice: str
 		
-		components = self.get_components()
+		components = self.get_components(component_type)
 		
 		while not valid:
 			os.system('cls')
-			print("Select your " + self.component_type)
-			
+			print("Select your ship's" + component_type)
 			for component in components:
 				stat_info = components[component].get_stat_info()
 				for stat in stat_info:
-					print(f"{stat['name']}) - {stat['value']}")
+					print(f"{stat}) - {stat_info[stat]}")
 				
 			user_choice = input()
 			valid = validate_list_input(len(components), user_choice)

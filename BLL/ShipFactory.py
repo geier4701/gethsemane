@@ -5,9 +5,12 @@ from repos.ComponentFetcher import ComponentFetcher
 class ShipFactory:
 	def create_ship(self):
 		created_ship = Ship()
+		self.update_ship(created_ship)
+	
+	def update_ship(self, created_ship: Ship):
+		type_fetcher = ComponentFetcher()
 		
-		type_fetcher = ComponentFetcher("ShipType")
-		selected_component = type_fetcher.select_component()
+		selected_component = type_fetcher.select_component("ShipType")
 		created_ship.size = selected_component
 		
 		print("Choose an impulse engine")
