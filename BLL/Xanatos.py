@@ -1,13 +1,18 @@
-from Ship import Ship
+from BLL.Horatio import Horatio
+from Models.Ship import Ship
 
 
 class Xanatos:
-	player: Ship
-	opponent: Ship
+	player_ship: Ship
+	opponent_ship: Ship
 	
 	def __init__(self, player: Ship, opponent: Ship):
-		self.player = player
-		self.opponent = opponent
+		self.player_ship = player
+		self.opponent_ship = opponent
 	
 	def gambit(self):
-		pass
+		player_captain = Horatio(self.player_ship)
+		opponent_captain = Horatio(self.opponent_ship)
+
+		while self.player_ship.health > 0 and self.opponent_ship.health > 0:
+			pass

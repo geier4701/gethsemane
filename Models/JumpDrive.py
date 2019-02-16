@@ -1,4 +1,6 @@
 from Models.Component import Component
+from Models.Location import Location
+from Models.Ship import Ship
 
 
 class JumpDrive(Component):
@@ -11,4 +13,17 @@ class JumpDrive(Component):
 		self.jump_cost = jump_cost
 	
 	def get_stat_info(self):
-		pass
+		return {
+			"id": self.id,
+			"name": self.name,
+			"mass": self.mass,
+			"jump_cost": self.jump_cost
+		}
+
+	def jump_move(self, coord: Location, ship: Ship):
+		if ship.current_energy >= self.jump_cost:
+			ship.location = coord
+			ship.current_energy -= self.jump_cost
+			return True
+		else:
+			return False
