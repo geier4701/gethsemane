@@ -16,12 +16,11 @@ class Horatio:
 		for subroutine in self.subroutines:
 			engage = True
 			for condition in subroutine.conditions:
-				if not condition:
+				if not condition.test():
 					engage = False
 			
-			if engage:
-				self.last_action = subroutine.actions
-				# SHOULD PROBABLY PERFORM ACTION AND THEN SEND IT TO GAME MANAGER TO UPDATE GAME STATE
-				return subroutine.actions
+				if engage:
+					self.last_action = subroutine.actions
+					return subroutine.actions
 		
 		return self.last_action

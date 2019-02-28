@@ -1,4 +1,4 @@
-from Models import Computer, ShipType, Radar, JumpDrive, ImpulseEngine, Location
+from Models import Computer, ShipType, Radar, JumpDrive, ImpulseEngine, Coordinates
 
 
 class Ship:
@@ -10,7 +10,7 @@ class Ship:
 	jump_drive: JumpDrive
 	impulse_engine: ImpulseEngine
 	computer: Computer
-	location: Location
+	location: Coordinates
 	impulse_speed: int
 	direction: int
 	max_energy: int
@@ -18,7 +18,7 @@ class Ship:
 	health: int
 	
 	def __init__(self):
-		self.location = Location.Location(0, 0, 0)
+		self.location = Coordinates.Coordinates(0, 0, 0)
 	
 	def update_module_status(self, module, action):
 		pass

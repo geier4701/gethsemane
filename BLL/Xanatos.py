@@ -1,5 +1,6 @@
 from BLL.Horatio import Horatio
 from Models.Ship import Ship
+from Subroutines.Actions import FireWeapon
 
 
 class Xanatos:
@@ -15,4 +16,10 @@ class Xanatos:
 		opponent_captain = Horatio(self.opponent_ship)
 
 		while self.player_ship.health > 0 and self.opponent_ship.health > 0:
-			pass
+			player_to_perform = player_captain.command()
+			opponent_to_perform = opponent_captain.command()
+			
+			# BREAK THIS OUT INTO REUSABLE CODE
+			for action in player_to_perform:
+				if action is FireWeapon:
+					action.activate(self.player_ship.radar.enemy_coord)

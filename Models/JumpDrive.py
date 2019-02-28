@@ -1,5 +1,5 @@
 from Models.Component import Component
-from Models.Location import Location
+from Models.Coordinates import Coordinates
 from Models.Ship import Ship
 
 
@@ -20,7 +20,7 @@ class JumpDrive(Component):
 			"jump_cost": self.jump_cost
 		}
 
-	def jump_move(self, coord: Location, ship: Ship):
+	def jump_move(self, coord: Coordinates, ship: Ship):
 		if ship.current_energy >= self.jump_cost:
 			ship.location = coord
 			ship.current_energy -= self.jump_cost
