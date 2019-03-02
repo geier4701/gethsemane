@@ -2,13 +2,12 @@ import math
 from abc import ABC, abstractmethod
 
 from Coordinates import Coordinates
+from Ship import Ship
 
 
-class Status(ABC):
-	# TAKES SHIP AND/OR COMPONENT
-	# EITHER HEALTH, DISTANCE, AMMUNITION, ENERGY LEVEL, OR TURNS(?) SINCE LAST SCAN
+class Condition(ABC):
 	@abstractmethod
-	def test(self):
+	def test(self, own_ship: Ship, enemy_ship: Ship):
 		pass
 	
 	@staticmethod

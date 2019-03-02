@@ -3,6 +3,8 @@ from Models.Ship import Ship
 from Subroutines.Actions import FireWeapon
 
 
+# XANATOS PERFORMS ACTIONS ORDERED BY EACH HORATIO AND CAN UPDATE TRUE STATE OF SHIPS
+# AND GIVE BACK INFORMATION TO CAPTAINS ON ENEMY SHIPS (APPROPRIATE TO WHAT THEY SHOULD KNOW
 class Xanatos:
 	player_ship: Ship
 	opponent_ship: Ship

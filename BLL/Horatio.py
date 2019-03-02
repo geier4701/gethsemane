@@ -4,11 +4,12 @@ from Subroutines.Actions import Action
 
 class Horatio:
 	subroutines: []
-	ship: Ship
+	own_ship: Ship
 	last_action: []
+	enemy_ship: Ship
 	
 	def __init__(self, ship):
-		self.ship = ship
+		self.own_ship = ship
 		self.subroutines = ship.subroutines
 	
 	def command(self):
@@ -16,7 +17,7 @@ class Horatio:
 		for subroutine in self.subroutines:
 			engage = True
 			for condition in subroutine.conditions:
-				if not condition.test():
+				if not condition.test(self.own_ship, self.enemy_ship):
 					engage = False
 			
 				if engage:

@@ -1,22 +1,29 @@
 from Ship import Ship
-from Subroutines.States.Status import Status
+from Subroutines.States.Condition import Condition
 from Weapon import Weapon
 
 
-class AmmunitionLevel(Status):
-	target: Ship
-	weapon: Weapon
+class AmmunitionLevel(Condition):
+	name = "AmmunitionLevel"
+	weapon_id: int
 	ammunition_level: int
-	minmax = str
+	minmax: str
+	target: str
 	
-	def __init__(self, target: Ship, weapon: Weapon, ammunition_level: int, minmax: str):
-		self.target = target
-		self.weapon = weapon
+	def __init__(self, weapon_id: int, ammunition_level: int, minmax: str, target: str):
+		self.weapon_id = weapon_id
 		self.ammunition_level = ammunition_level
 		self.minmax = minmax
 	
-	def test(self):
-		to_test = self.target.armament[self.weapon.id]
+	def test(self, own_ship: Ship, enemy_ship: Ship):
+		if self.target == "self":
+			target_ship = own_ship
+		elif self.target == "enemy":
+			target_ship = enemy_ship
+		else:
+			raise Exception('Invalid ship target in AmmunitionLevel Condition')
+		
+		to_test = target_ship.armament[self.weapon_id]
 		result = False
 		if self.minmax == "max":
 			if to_test.ammunition <= self.ammunition_level:

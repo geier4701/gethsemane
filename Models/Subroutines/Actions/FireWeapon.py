@@ -4,6 +4,7 @@ from Weapon import Weapon
 
 
 class FireWeapon(Action):
+	name = "FireWeapon"
 	weapon: Weapon
 	
 	def __init__(self, weapon: Weapon):

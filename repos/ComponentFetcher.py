@@ -8,8 +8,9 @@ from ShipType import ShipType
 from UI.ValidUserInput import validate_list_input
 
 
+# THIS WHOLE FILE IS UNNECESSARY, AVAILABLE COMPONENTS CAN BE CODED INTO IN-MEMORY REPO
+# DELETE IN THE FUTURE
 class ComponentFetcher:
-	# IF THIS IS INSERTED AT INSTANTIATION BY A MANAGER/FACTORY WE CAN TEST IT
 	component_library = {
 		"ShipType": {"path": "ShipTypes.txt", "component_class": ShipType},
 		"Computer": {"path": "Computers.txt", "component_class": Computer},

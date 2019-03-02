@@ -1,21 +1,17 @@
 from Ship import Ship
-from Subroutines.States.Status import Status
+from Subroutines.States.Condition import Condition
 
 
-class EnergyLevel(Status):
-	own_ship: Ship
-	enemy_ship: Ship
+class Distance(Condition):
 	range: int
-	minmax = str
+	minmax: str
 	
-	def __init__(self, own_ship: Ship, enemy_ship: Ship, minmax: str):
-		self.target = own_ship
-		self.enemy_ship = enemy_ship
+	def __init__(self, minmax: str):
 		self.minmax = minmax
 	
-	def test(self):
+	def test(self, own_ship: Ship, enemy_ship: Ship):
 		result = False
-		distance = self.calculate_distance(self.own_ship.location, self.enemy_ship.location)
+		distance = self.calculate_distance(own_ship.location, enemy_ship.location)
 		
 		if self.minmax == "max":
 			if distance <= self.range:
