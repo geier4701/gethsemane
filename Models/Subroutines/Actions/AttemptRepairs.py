@@ -2,4 +2,7 @@ from Subroutines.Actions.Action import Action
 
 
 class AttemptRepairs(Action):
-	pass
+	name = "AttemptRepairs"
+	
+	def activate(self, ship, component_id):
+		pass

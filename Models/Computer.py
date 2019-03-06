@@ -13,4 +13,10 @@ class Computer(Component):
 		self.capacity = capacity
 	
 	def get_stat_info(self):
-		pass
+		return {
+			"id": self.id,
+			"name": self.name,
+			"mass": self.mass,
+			"speed": self.speed,
+			"capacity": self.capacity
+		}

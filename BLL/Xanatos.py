@@ -1,27 +1,27 @@
 from BLL.Horatio import Horatio
 from Models.Ship import Ship
-from Subroutines.Actions import FireWeapon
 
 
-# XANATOS PERFORMS ACTIONS ORDERED BY EACH HORATIO AND CAN UPDATE TRUE STATE OF SHIPS
-# AND GIVE BACK INFORMATION TO CAPTAINS ON ENEMY SHIPS (APPROPRIATE TO WHAT THEY SHOULD KNOW
 class Xanatos:
 	player_ship: Ship
-	opponent_ship: Ship
+	npc_ship: Ship
 	
 	def __init__(self, player: Ship, opponent: Ship):
 		self.player_ship = player
-		self.opponent_ship = opponent
+		self.npc_ship = opponent
+	
+	def move_ship(self, ship: Ship):
+		ship.location.location[0] += ship.location.speed[0]
+		ship.location.location[1] += ship.location.speed[1]
+		ship.location.location[2] += ship.location.speed[2]
 	
 	def gambit(self):
 		player_captain = Horatio(self.player_ship)
-		opponent_captain = Horatio(self.opponent_ship)
+		opponent_captain = Horatio(self.npc_ship)
 
-		while self.player_ship.health > 0 and self.opponent_ship.health > 0:
-			player_to_perform = player_captain.command()
-			opponent_to_perform = opponent_captain.command()
-			
-			# BREAK THIS OUT INTO REUSABLE CODE
-			for action in player_to_perform:
-				if action is FireWeapon:
-					action.activate(self.player_ship.radar.enemy_coord)
+		# SHOULD ACTIONS OR MOVEMENT HAPPEN FIRST?
+		while self.player_ship.health > 0 and self.npc_ship.health > 0:
+			player_captain.command()
+			opponent_captain.command()
+			self.move_ship(self.player_ship)
+			self.move_ship(self.npc_ship)

@@ -2,11 +2,8 @@ from Component import Component
 
 
 class Weapon(Component):
-	id: int
-	name: str
 	range: int
 	damage_type: str
-	mass: int
 	missile_velocity: int
 	energy_cost: int
 	munition_type: str

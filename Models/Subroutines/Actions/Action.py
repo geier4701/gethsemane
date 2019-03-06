@@ -5,5 +5,5 @@ class Action(ABC):
 	name: str
 	
 	@abstractmethod
-	def activate(self, arg):
+	def activate(self, ship, arg):
 		pass
