@@ -19,7 +19,7 @@ class EnergyLevel(Condition):
 		elif self.target == "enemy":
 			target_ship = enemy_ship
 		else:
-			raise Exception('Invalid ship target in EnergyLevel Condition')
+			raise Exception('Invalid ship target in EnergyLevel Conditions')
 		
 		result = False
 		if self.minmax == "max":

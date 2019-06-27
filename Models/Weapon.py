@@ -1,4 +1,5 @@
 from Component import Component
+from Coordinates import Coordinates
 
 
 class Weapon(Component):
@@ -21,13 +22,7 @@ class Weapon(Component):
 		self.ammunition = ammunition
 		self.operational = True
 	
-	def disable(self):
-		self.operational = False
-	
-	def enable(self):
-		self.operational = True
-	
-	def fire(self):
+	def fire(self, coord: Coordinates):
 		pass
 
 	def get_stat_info(self):

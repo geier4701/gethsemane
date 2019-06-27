@@ -18,7 +18,7 @@ class Health(Condition):
 		elif self.target == "enemy":
 			target_ship = enemy_ship
 		else:
-			raise Exception('Invalid ship target in Health Condition')
+			raise Exception('Invalid ship target in Health Conditions')
 		
 		result = False
 		if self.minmax == "max":

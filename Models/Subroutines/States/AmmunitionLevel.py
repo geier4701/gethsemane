@@ -1,6 +1,5 @@
 from Ship import Ship
 from Subroutines.States.Condition import Condition
-from Weapon import Weapon
 
 
 class AmmunitionLevel(Condition):
@@ -21,7 +20,7 @@ class AmmunitionLevel(Condition):
 		elif self.target == "enemy":
 			target_ship = enemy_ship
 		else:
-			raise Exception('Invalid ship target in AmmunitionLevel Condition')
+			raise Exception('Invalid ship target in AmmunitionLevel Conditions')
 		
 		to_test = target_ship.armament[self.weapon_id]
 		result = False
