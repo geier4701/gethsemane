@@ -1,5 +1,5 @@
 from BLL.Horatio import Horatio
-from Models.Ship import Ship
+from Models import Ship, Weapon
 from Subroutines.Actions import FireWeapon, FireImpulse, Jump, Scan, AttemptRepairs
 
 
@@ -24,18 +24,18 @@ class Xanatos:
 			self.move_ship(self.player_ship)
 			self.move_ship(self.npc_ship)
 			self.engage(player_captain.command(), player_captain, opponent_captain)
-			self.engage(opponent_captain.command(), player_captain, opponent_captain)
+			self.engage(opponent_captain.command(), opponent_captain, player_captain)
 	
-	def engage(self, actions, captain: Horatio, enemy_captain: Horatio):
+	def engage(self, actions, captain: Horatio, enemy_captain: Horatio, info=None):
 		for action in actions:
 			if action is FireImpulse:
 				action.activate(captain)
 			if action is FireWeapon:
-				# THIS IS GOING TO NEED TO SOMEHOW TALK WITH XANATOS TO ACTUALLY TAKE ACTION ON ENEMY SHIP
-				action.activate(captain)
+				attack = action.activate(captain, info)
+				if attack.coord == enemy_captain.own_ship.location:
+					self.deal_damage(enemy_captain.own_ship, attack.weapon)
 			if action is Jump:
-				# THIS NEEDS TO SOMEHOW KNOW WHAT THE DESIRED COORDINATES ARE
-				action.activate(captain)
+				action.activate(captain, info)
 			if action is Scan:
 				if action.activate(captain):
 					captain.enemy_intel.current_energy = enemy_captain.own_ship.current_energy
@@ -43,5 +43,7 @@ class Xanatos:
 					captain.enemy_intel.direction = enemy_captain.own_ship.direction
 					captain.enemy_intel.health = enemy_captain.own_ship.health
 			if action is AttemptRepairs:
-				# THIS NEEDS TO KNOW WHICH COMPONENT TO REPAIR
-				pass
+				action.activate(captain)
+	
+	def deal_damage(self, ship: Ship, weapon: Weapon):
+		ship.health -= weapon.damage

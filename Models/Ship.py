@@ -1,4 +1,4 @@
-from Models import Computer, ShipType, Radar, JumpDrive, ImpulseEngine, Coordinates
+from Models import Computer, ShipType, Radar, JumpDrive, ImpulseEngine, Coordinates, Weapon
 
 
 class Ship:
@@ -19,6 +19,3 @@ class Ship:
 	
 	def __init__(self):
 		self.location = Coordinates.Coordinates(0, 0, 0)
-	
-	def update_module_status(self, module, action):
-		pass

@@ -1,6 +1,5 @@
-from Coordinates import Coordinates
+from BLL.Horatio import Horatio
 from JumpDrive import JumpDrive
-from Ship import Ship
 from Subroutines.Actions.Action import Action
 
 
@@ -8,12 +7,12 @@ class Jump(Action):
 	name = "Jump"
 	jump_drive: JumpDrive
 	
-	def activate(self, ship: Ship, coord: Coordinates):
-		if ship.current_energy >= ship.impulse_engine.energy_cost:
-			ship.current_energy -= ship.impulse_engine.energy_cost
-			ship.location.speed[0] = ship.location.speed[0] + coord.location[0]
-			ship.location.speed[1] = ship.location.speed[1] + coord.location[1]
-			ship.location.speed[2] = ship.location.speed[2] + coord.location[2]
+	def activate(self, captain: Horatio, info=None):
+		if captain.own_ship.current_energy >= captain.own_ship.impulse_engine.energy_cost:
+			captain.own_ship.current_energy -= captain.own_ship.impulse_engine.energy_cost
+			captain.own_ship.location.speed[0] = captain.own_ship.location.speed[0] + info.location[0]
+			captain.own_ship.location.speed[1] = captain.own_ship.location.speed[1] + info.location[1]
+			captain.own_ship.location.speed[2] = captain.own_ship.location.speed[2] + info.location[2]
 			return True
 		else:
 			return False

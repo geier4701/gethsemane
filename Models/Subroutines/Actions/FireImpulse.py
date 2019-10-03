@@ -9,7 +9,7 @@ class FireImpulse(Action):
 	def __init__(self, velocity_change: Coordinates):
 		self.velocity_change = velocity_change
 	
-	def activate(self, captain: Horatio):
+	def activate(self, captain: Horatio, info=None):
 		if captain.own_ship.current_energy >= captain.own_ship.impulse_engine.energy_cost:
 			captain.own_ship.current_energy -= captain.own_ship.impulse_engine.energy_cost
 			captain.own_ship.location.speed[0] = captain.own_ship.location.speed[0] + self.velocity_change.speed[0]
