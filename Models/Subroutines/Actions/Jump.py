@@ -1,5 +1,5 @@
 from BLL.Horatio import Horatio
-from JumpDrive import JumpDrive
+from Components.JumpDrive import JumpDrive
 from Subroutines.Actions.Action import Action
 
 

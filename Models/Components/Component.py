@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 
 class Component(ABC):
-	id: int
+	component_id: int
 	name: str
 	mass: int
 	operational: bool

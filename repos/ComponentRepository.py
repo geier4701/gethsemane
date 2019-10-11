@@ -2,15 +2,14 @@ import os
 from typing import Dict
 from pathlib import Path
 
-import ImpulseEngine
-from Models import Component, Computer, JumpDrive, Radar
+from Components import Computer, ImpulseEngine, Radar, Component, JumpDrive
 from ShipType import ShipType
 from UI.ValidUserInput import validate_list_input
 
 
-# THIS WHOLE FILE IS UNNECESSARY, AVAILABLE COMPONENTS CAN BE CODED INTO IN-MEMORY REPO
-# DELETE IN THE FUTURE
-class ComponentFetcher:
+# REMAKE THIS CLASS INTO A JSON PARSER TO PULL DATA FROM FIREBASE DATABASE
+# MAYBE
+class ComponentRepository:
 	component_library = {
 		"ShipType": {"path": "ShipTypes.txt", "component_class": ShipType},
 		"Computer": {"path": "Computers.txt", "component_class": Computer},
@@ -28,7 +27,7 @@ class ComponentFetcher:
 		for line in file:
 			stats = line.split(",")
 			to_add = self.component_library[component_type]["component_class"](*stats)
-			components[to_add.id] = to_add
+			components[to_add.component_id] = to_add
 		
 		file.close()
 		
@@ -47,7 +46,7 @@ class ComponentFetcher:
 		
 		while not valid:
 			os.system('cls')
-			print("Select your ship's" + component_type)
+			print("Select your ship's " + component_type)
 			for component in components:
 				stat_info = components[component].get_stat_info()
 				for stat in stat_info:

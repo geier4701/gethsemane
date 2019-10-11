@@ -1,2 +1,0 @@
-1,Frigate,100
-2,Destroyer,125

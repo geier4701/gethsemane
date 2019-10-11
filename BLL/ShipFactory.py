@@ -1,5 +1,5 @@
 from Ship import Ship
-from repos.ComponentFetcher import ComponentFetcher
+from repos.ComponentRepository import ComponentRepository
 
 
 class ShipFactory:
@@ -8,10 +8,10 @@ class ShipFactory:
 		self.update_ship(created_ship)
 	
 	def update_ship(self, created_ship: Ship):
-		type_fetcher = ComponentFetcher()
+		type_fetcher = ComponentRepository()
 		
 		selected_component = type_fetcher.select_component("ShipType")
-		created_ship.size = selected_component
+		created_ship.ship_class = selected_component
 		
 		print("Choose an impulse engine")
 		print("1) Cavalier - zoom!")

@@ -1,5 +1,5 @@
 from BLL.Horatio import Horatio
-from Radar import Radar
+from Components.Radar import Radar
 from Subroutines.Actions.Action import Action
 
 

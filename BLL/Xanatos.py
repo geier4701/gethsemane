@@ -1,6 +1,8 @@
 from BLL.Horatio import Horatio
-from Models import Ship, Weapon
+from Models import Ship
+from Components import Weapon
 from Subroutines.Actions import FireWeapon, FireImpulse, Jump, Scan, AttemptRepairs
+from typing import List
 
 
 class Xanatos:
@@ -11,18 +13,13 @@ class Xanatos:
 		self.player_ship = player
 		self.npc_ship = opponent
 	
-	def move_ship(self, ship: Ship):
-		ship.location.location[0] += ship.location.speed[0]
-		ship.location.location[1] += ship.location.speed[1]
-		ship.location.location[2] += ship.location.speed[2]
-	
 	def gambit(self):
 		player_captain = Horatio(self.player_ship)
 		opponent_captain = Horatio(self.npc_ship)
 
 		while self.player_ship.health > 0 and self.npc_ship.health > 0:
-			self.move_ship(self.player_ship)
-			self.move_ship(self.npc_ship)
+			self.generate_energy([self.player_ship, self.npc_ship])
+			self.move_ships([self.player_ship, self.npc_ship])
 			self.engage(player_captain.command(), player_captain, opponent_captain)
 			self.engage(opponent_captain.command(), opponent_captain, player_captain)
 	
@@ -44,6 +41,20 @@ class Xanatos:
 					captain.enemy_intel.health = enemy_captain.own_ship.health
 			if action is AttemptRepairs:
 				action.activate(captain)
+	
+	def move_ships(self, ships: List[Ship]):
+		for ship in ships:
+			ship.location.location[0] += ship.location.speed[0]
+			ship.location.location[1] += ship.location.speed[1]
+			ship.location.location[2] += ship.location.speed[2]
+	
+	def generate_energy(self, ships: List[Ship]):
+		for ship in ships:
+			energy = ship.current_energy + ship.ship_class.power_gen
+			if energy <= ship.ship_class.battery_max:
+				ship.current_energy = energy
+			else:
+				ship.current_energy = ship.ship_class.battery_max
 	
 	def deal_damage(self, ship: Ship, weapon: Weapon):
 		ship.health -= weapon.damage

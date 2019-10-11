@@ -1,11 +1,12 @@
-from Models import Computer, ShipType, Radar, JumpDrive, ImpulseEngine, Coordinates, Weapon
+from Models import ShipType, Coordinates
+from Components import Computer, ImpulseEngine, Radar, JumpDrive
 
 
 class Ship:
-	size: ShipType
-	armament: {}
-	crew: {}
-	subroutines: []
+	ship_class: ShipType
+	armament: dict
+	crew: dict
+	subroutines: list
 	radar: Radar
 	jump_drive: JumpDrive
 	impulse_engine: ImpulseEngine

@@ -1,5 +1,5 @@
 from BLL.Horatio import Horatio
-from Component import Component
+from Components.Component import Component
 from Subroutines.Actions.Action import Action
 
 

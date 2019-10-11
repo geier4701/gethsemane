@@ -1,20 +1,22 @@
-from Models.Component import Component
+from Components.Component import Component
 
 
 class ImpulseDrive(Component):
 	max_accel: int
 	energy_cost: int
 	
-	def __init__(self, id: int, name: str, mass: int, energy_cost: int, max_accel: int):
-		self.id = id
+	def __init__(self, component_id: int, name: str, mass: int, repair_cost: int, energy_cost: int, max_accel: int):
+		self.component_id = component_id
 		self.name = name
 		self.mass = mass
+		self.repair_cost = repair_cost
 		self.energy_cost = energy_cost
 		self.max_accel = max_accel
+		self.operational = True
 	
 	def get_stat_info(self):
 		return {
-			"id": self.id,
+			"id": self.component_id,
 			"name": self.name,
 			"mass": self.mass,
 			"energy_cost": self.energy_cost,

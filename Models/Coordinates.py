@@ -1,6 +1,6 @@
 class Coordinates:
-	location: []
-	speed: []
+	location: list
+	speed: list
 	
 	def __init__(self, x: int, y: int, z: int):
 		self.location = [x, y, z]

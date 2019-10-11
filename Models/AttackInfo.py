@@ -1,5 +1,5 @@
 from Coordinates import Coordinates
-from Weapon import Weapon
+from Components.Weapon import Weapon
 
 
 class AttackInfo:

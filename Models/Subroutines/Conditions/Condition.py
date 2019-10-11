@@ -1,10 +1,20 @@
 import math
 from abc import ABC, abstractmethod
+from enum import Enum
 from Coordinates import Coordinates
 from Ship import Ship
 
 
+class Target(Enum):
+	SELF: 0
+	ENEMY: 1
+
+
 class Condition(ABC):
+	at_least: int
+	at_most: int
+	target: Target
+	
 	@abstractmethod
 	def test(self, own_ship: Ship, enemy_ship: Ship):
 		pass

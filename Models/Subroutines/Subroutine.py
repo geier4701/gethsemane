@@ -1,14 +1,15 @@
 class Subroutine:
-	id: int
+	subroutine_id: int
 	name: str
 	ship_id: int
 	priority: int
-	conditions: []
-	actions: []
+	conditions: list
+	actions: list
 	
-	def __init__(self, id, name, ship_id, priority, conditions, actions):
+	# WHAT IS ALL THIS, DO I NEED ALL THIS?
+	def __init__(self, subroutine_id, name, ship_id, priority, conditions, actions):
 		self.name = name
-		self.id = id
+		self.subroutine_id = subroutine_id
 		self.ship_id = ship_id
 		self.priority = priority
 		self.conditions = conditions

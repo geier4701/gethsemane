@@ -1,20 +1,22 @@
 from Ship import Ship
+from Subroutines import Subroutine
+from typing import List
 
 
 class Horatio:
-	subroutines: []
+	subroutines: List[Subroutine]
 	own_ship: Ship
-	last_action: []
+	last_action: list
 	enemy_intel: Ship
 	
-	def __init__(self, ship):
+	def __init__(self, ship: Ship):
 		self.own_ship = ship
 		self.subroutines = ship.subroutines
 		self.enemy_intel = Ship()
 	
 	def command(self):
-		self.subroutines.sort(self, self.subroutines.priority)
-		actions_to_take = []
+		self.subroutines.sort(key=lambda sub: subroutine.priority)
+		actions_to_take = list
 		for subroutine in self.subroutines:
 			make_it_so = True
 			for condition in subroutine.conditions:
