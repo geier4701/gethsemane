@@ -14,3 +14,6 @@ class AttemptRepairs(Action):
 		if captain.own_ship.current_energy >= self.component.repair_cost:
 			captain.own_ship.current_energy -= self.component.repair_cost
 			self.component.enable()
+			return True
+		else:
+			return False

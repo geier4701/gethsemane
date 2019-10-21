@@ -1,7 +1,7 @@
 from BLL.Horatio import Horatio
 from Models import Ship
 from Components import Weapon
-from Subroutines.Actions import FireWeapon, FireImpulse, Jump, Scan, AttemptRepairs
+from Subroutines.Actions import FireWeapon, Scan
 from typing import List
 
 
@@ -25,28 +25,22 @@ class Xanatos:
 	
 	def engage(self, actions, captain: Horatio, enemy_captain: Horatio, info=None):
 		for action in actions:
-			if action is FireImpulse:
-				action.activate(captain)
+			action_result = action.activate(captain, info)
 			if action is FireWeapon:
-				attack = action.activate(captain, info)
-				if attack.coord == enemy_captain.own_ship.location:
-					self.deal_damage(enemy_captain.own_ship, attack.weapon)
-			if action is Jump:
-				action.activate(captain, info)
-			if action is Scan:
-				if action.activate(captain):
-					captain.enemy_intel.current_energy = enemy_captain.own_ship.current_energy
-					captain.enemy_intel.location = enemy_captain.own_ship.location
-					captain.enemy_intel.direction = enemy_captain.own_ship.direction
-					captain.enemy_intel.health = enemy_captain.own_ship.health
-			if action is AttemptRepairs:
-				action.activate(captain)
+				if action_result.coord == enemy_captain.own_ship.location:
+					self.deal_damage(enemy_captain.own_ship, action_result.weapon)
+			if action is Scan and action_result is True:
+				captain.enemy_intel.current_energy = enemy_captain.own_ship.current_energy
+				captain.enemy_intel.location = enemy_captain.own_ship.location
+				captain.enemy_intel.direction = enemy_captain.own_ship.direction
+				captain.enemy_intel.health = enemy_captain.own_ship.health
 	
 	def move_ships(self, ships: List[Ship]):
 		for ship in ships:
-			ship.location.location[0] += ship.location.speed[0]
-			ship.location.location[1] += ship.location.speed[1]
-			ship.location.location[2] += ship.location.speed[2]
+			loc = 0
+			while loc < 3:
+				ship.location.location[loc] += ship.location.speed[loc]
+				loc += 1
 	
 	def generate_energy(self, ships: List[Ship]):
 		for ship in ships:

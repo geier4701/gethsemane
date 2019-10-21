@@ -13,4 +13,5 @@ class FireWeapon(Action):
 		self.weapon = weapon
 	
 	def activate(self, captain: Horatio, info=None):
+		# THIS (AND AMMUNITIONLEVEL) NEED A WAY TO CHECK FOR AMMO OF NECESSARY TYPE
 		return AttackInfo(info, self.weapon)

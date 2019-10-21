@@ -3,6 +3,8 @@ from Subroutines.Conditions.Condition import Condition, Target
 
 
 class AmmunitionLevel(Condition):
+	# I DON'T THINK AMMUNITION ID WILL WORK FOR THIS AND FIREWEAPON
+	# SEE FIREWEAPON
 	ammunition_id: int
 	
 	def __init__(self, at_least: int, at_most: int, target: Target, ammunition_id: int):

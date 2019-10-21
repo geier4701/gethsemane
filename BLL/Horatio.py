@@ -1,12 +1,13 @@
 from Ship import Ship
 from Subroutines import Subroutine
 from typing import List
+from Subroutines.Actions import Action
 
 
 class Horatio:
 	subroutines: List[Subroutine]
 	own_ship: Ship
-	last_action: list
+	last_action: List[Action]
 	enemy_intel: Ship
 	
 	def __init__(self, ship: Ship):
@@ -16,12 +17,13 @@ class Horatio:
 	
 	def command(self):
 		self.subroutines.sort(key=lambda sub: subroutine.priority)
-		actions_to_take = list
+		actions_to_take = List[Action]
 		for subroutine in self.subroutines:
 			make_it_so = True
 			for condition in subroutine.conditions:
 				if not condition.test(self.own_ship, self.enemy_intel):
 					make_it_so = False
+					break
 			
 			if make_it_so:
 				self.last_action = subroutine.actions
