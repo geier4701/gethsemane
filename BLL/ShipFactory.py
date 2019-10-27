@@ -1,5 +1,5 @@
 from Ship import Ship
-from repos.ComponentRepository import ComponentRepository
+from repos.JSONComponentRepository import JSONComponentRepository
 
 
 class ShipFactory:
@@ -8,7 +8,7 @@ class ShipFactory:
 		self.update_ship(created_ship)
 	
 	def update_ship(self, created_ship: Ship):
-		type_fetcher = ComponentRepository()
+		type_fetcher = JSONComponentRepository()
 		
 		selected_component = type_fetcher.select_component("ShipType")
 		created_ship.ship_class = selected_component

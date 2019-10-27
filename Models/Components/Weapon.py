@@ -10,8 +10,7 @@ class Weapon(Component):
 	energy_cost: int
 	operational: bool
 	
-	def __init__(self, component_id: int, name: str, mass: int, repair_cost: int, damage: int, ammunition_type: AmmunitionType,
-				munition_velocity: int, energy_cost: int):
+	def __init__(self, component_id: int, name: str, mass: int, repair_cost: int, damage: int, ammunition_type: AmmunitionType, munition_velocity: int, energy_cost: int):
 		self.component_id = component_id
 		self.name = name
 		self.mass = mass

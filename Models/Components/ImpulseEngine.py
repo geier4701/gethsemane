@@ -1,7 +1,7 @@
 from Components.Component import Component
 
 
-class ImpulseDrive(Component):
+class ImpulseEngine(Component):
 	max_accel: int
 	energy_cost: int
 	

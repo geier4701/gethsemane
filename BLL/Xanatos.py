@@ -7,19 +7,19 @@ from typing import List
 
 class Xanatos:
 	player_ship: Ship
-	npc_ship: Ship
+	opponent_ship: Ship
 	
 	def __init__(self, player: Ship, opponent: Ship):
 		self.player_ship = player
-		self.npc_ship = opponent
+		self.opponent_ship = opponent
 	
 	def gambit(self):
 		player_captain = Horatio(self.player_ship)
-		opponent_captain = Horatio(self.npc_ship)
+		opponent_captain = Horatio(self.opponent_ship)
 
-		while self.player_ship.health > 0 and self.npc_ship.health > 0:
-			self.generate_energy([self.player_ship, self.npc_ship])
-			self.move_ships([self.player_ship, self.npc_ship])
+		while self.player_ship.health > 0 and self.opponent_ship.health > 0:
+			self.generate_energy([self.player_ship, self.opponent_ship])
+			self.move_ships([self.player_ship, self.opponent_ship])
 			self.engage(player_captain.command(), player_captain, opponent_captain)
 			self.engage(opponent_captain.command(), opponent_captain, player_captain)
 	
@@ -29,6 +29,7 @@ class Xanatos:
 			if action is FireWeapon:
 				if action_result.coord == enemy_captain.own_ship.location and action_result.ammo is not None:
 					# TODO: Track weapons / Check enemy ship speed as well as location
+					# TODO: Implement armour
 					self.deal_damage(enemy_captain.own_ship, action_result.weapon)
 			if action is Scan and action_result is True:
 				captain.enemy_intel = enemy_captain.own_ship

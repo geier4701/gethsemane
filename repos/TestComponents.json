@@ -1,31 +1,31 @@
 {
-  "armament" : {
-      "ammunitions" : {
-        "1" : {
-          "name" : "Standard Rail",
-          "mass" : 1,
-          "repair_cost" : 0,
-          "damage_type" : 2
-        }
-    },
-    "armour" : {
-      "1" : {
-        "name" : "Aluminum",
-        "mass" : 1,
-        "repair_cost" : 0,
-        "armour_type" : 2
-      }
-    },
-    "weapons" : {
-      "1" : {
-        "name" : "Medium Laser",
-        "mass" : 10,
-        "repair_cost" : 30,
-        "damage" : 10,
-        "ammunition_type" : 0,
-        "munition_velocity" : 299792458,
-        "energy_cost" : 50
-      }
+  "ammunitions" : {
+    "1" : {
+      "name" : "Standard Rail",
+      "mass" : 1,
+      "repair_cost" : 0,
+      "damage_type" : 2,
+      "ammunition_type" : 2,
+      "max_ammo" : 10
+    }
+  },
+  "armours" : {
+    "1" : {
+      "name" : "Aluminum",
+      "mass" : 1,
+      "repair_cost" : 0,
+      "armour_type" : 2
+    }
+  },
+  "weapons" : {
+    "1" : {
+      "name" : "Medium Laser",
+      "mass" : 10,
+      "repair_cost" : 30,
+      "damage" : 10,
+      "ammunition_type" : 0,
+      "munition_velocity" : 299792458,
+      "energy_cost" : 50
     }
   },
   "computers" : {
@@ -37,7 +37,7 @@
       "capacity" : 10
     }
   },
-  "impulse_drives" : {
+  "impulse_engine" : {
     "1" : {
       "name" : "Cavalier",
       "mass" : 30,
@@ -54,7 +54,7 @@
       "jump_cost" : 100
     }
   },
-  "radar" : {
+  "radars" : {
     "1" : {
       "name" : "Scout",
       "mass" : 10,
