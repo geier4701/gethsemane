@@ -27,13 +27,11 @@ class Xanatos:
 		for action in actions:
 			action_result = action.activate(captain, info)
 			if action is FireWeapon:
-				if action_result.coord == enemy_captain.own_ship.location:
+				if action_result.coord == enemy_captain.own_ship.location and action_result.ammo is not None:
+					# TODO: Track weapons / Check enemy ship speed as well as location
 					self.deal_damage(enemy_captain.own_ship, action_result.weapon)
 			if action is Scan and action_result is True:
-				captain.enemy_intel.current_energy = enemy_captain.own_ship.current_energy
-				captain.enemy_intel.location = enemy_captain.own_ship.location
-				captain.enemy_intel.direction = enemy_captain.own_ship.direction
-				captain.enemy_intel.health = enemy_captain.own_ship.health
+				captain.enemy_intel = enemy_captain.own_ship
 	
 	def move_ships(self, ships: List[Ship]):
 		for ship in ships:

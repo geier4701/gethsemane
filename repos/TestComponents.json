@@ -1,12 +1,12 @@
 {
   "armament" : {
-      "ammunition" : {
-      "1" : {
-        "name" : "Standard Rail",
-        "mass" : 1,
-        "repair_cost" : 0,
-        "damage_type" : 2
-      }
+      "ammunitions" : {
+        "1" : {
+          "name" : "Standard Rail",
+          "mass" : 1,
+          "repair_cost" : 0,
+          "damage_type" : 2
+        }
     },
     "armour" : {
       "1" : {
@@ -37,7 +37,7 @@
       "capacity" : 10
     }
   },
-  "impulse_engines" : {
+  "impulse_drives" : {
     "1" : {
       "name" : "Cavalier",
       "mass" : 30,

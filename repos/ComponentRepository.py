@@ -1,14 +1,14 @@
 import os
-from typing import Dict
+import json
+from typing import Dict, List
 from pathlib import Path
-
-from Components import Computer, ImpulseEngine, Radar, Component, JumpDrive
+from Components import Radar, Component, JumpDrive
+from Components.Computer import Computer
+from Components.ImpulseEngine import ImpulseDrive
 from ShipType import ShipType
 from UI.ValidUserInput import validate_list_input
 
 
-# REMAKE THIS CLASS INTO A JSON PARSER TO PULL DATA FROM FIREBASE DATABASE
-# MAYBE
 class ComponentRepository:
 	component_library = {
 		"ShipType": {"path": "ShipTypes.txt", "component_class": ShipType},
@@ -18,7 +18,37 @@ class ComponentRepository:
 		"Radar": {"path": "Radars.txt", "component_class": Radar}
 	}
 	
-	def get_components(self, component_type: str):
+	def get_components_of_type(self, component_type: str) -> List[Component]:
+		file = open('TestComponents.json')
+		data = json.load(file)
+		
+		components = []
+		if component_type is 'ammunition':
+			pass
+		if component_type is 'armour':
+			pass
+		if component_type is 'weapons':
+			pass
+		if component_type is 'computers':
+			for computer in data[component_type]:
+				components.append(Computer(data[component_type].index(computer), computer['name'], computer['mass'], computer['repair_cost'], computer['speed'], computer['capacity']))
+		if component_type is 'impulse_drives':
+			for engine in data[component_type]:
+				components.append(ImpulseDrive(data[component_type].index(engine), engine['name'], engine['mass'], engine['repair_cost'], engine['energy_cost'], engine['max_accel']))
+		if component_type is 'jump_drives':
+			pass
+		if component_type is 'radar':
+			pass
+		if component_type is 'radar':
+			pass
+		if component_type is 'ship_types':
+			pass
+		
+		file.close()
+		
+		return components
+	
+	def old_get_components(self, component_type: str):
 		components: Dict[int, Component] = {}
 		
 		repo_folder = Path(os.path.dirname(__file__))

@@ -1,12 +1,13 @@
 from typing import List
 from Models import ShipType, Coordinates
-from Components import Computer, ImpulseEngine, Radar, JumpDrive
+from Components import Computer, ImpulseEngine, Radar, JumpDrive, Ammunition
 from Subroutines import Subroutine
 
 
 class Ship:
 	ship_class: ShipType
 	armament: dict
+	ammunitions: List[Ammunition]
 	crew: dict
 	subroutines: List[Subroutine]
 	radar: Radar
@@ -23,7 +24,6 @@ class Ship:
 	def __init__(self):
 		self.location = Coordinates.Coordinates(0, 0, 0)
 	
-	# LIKELY NOT THE BEST WAY TO SUPPLY PARTS TO ISDISABLED()
 	def get_components(self):
 		components = {
 			self.radar.component_id: self.radar,

@@ -2,6 +2,7 @@ from AttackInfo import AttackInfo
 from BLL.Horatio import Horatio
 from Subroutines.Actions.Action import Action
 from Components.Weapon import Weapon
+from Subroutines.Conditions.Condition import Condition
 
 
 class FireWeapon(Action):
@@ -13,5 +14,12 @@ class FireWeapon(Action):
 		self.weapon = weapon
 	
 	def activate(self, captain: Horatio, info=None):
-		# THIS (AND AMMUNITIONLEVEL) NEED A WAY TO CHECK FOR AMMO OF NECESSARY TYPE
-		return AttackInfo(info, self.weapon)
+		ammo_to_check = Condition.get_ammunition(self.weapon.ammunition_type, captain.own_ship.ammunitions)
+		
+		ammo_to_use = None
+		for ammo in ammo_to_check:
+			if ammo.remaining_ammo > 0:
+				ammo_to_use = ammo
+				break
+		
+		return AttackInfo(info, self.weapon, ammo_to_use)

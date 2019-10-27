@@ -1,12 +1,5 @@
-from enum import Enum
+from Components.Ammunition import AmmunitionType
 from Components.Component import Component
-
-
-class AmmunitionType(Enum):
-	CRYSTAL: 0
-	MISSILE: 1
-	RAIL: 2
-	ELECTRIC: 3
 
 
 class Weapon(Component):
