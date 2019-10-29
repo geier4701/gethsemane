@@ -1,12 +1,12 @@
 from abc import ABC, abstractmethod
-from typing import Dict
+from typing import List
 
 from Components import Component
 
 
 class ComponentRepository(ABC):
 	@abstractmethod
-	def get_components_of_type(self, component_type: str) -> Dict[int, Component]:
+	def get_components_of_type(self, component_type: str) -> List[Component]:
 		pass
 	
 	@abstractmethod

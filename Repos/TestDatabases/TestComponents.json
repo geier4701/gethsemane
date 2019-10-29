@@ -76,6 +76,5 @@
       "power_gen": 150,
       "battery_max" : 800
     }
-  },
-  "subroutines" : null
+  }
 }

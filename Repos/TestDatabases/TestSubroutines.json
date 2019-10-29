@@ -1,0 +1,31 @@
+{
+  "1" : {
+    "ship_id" : 1,
+    "conditions" : {
+      "1" : {
+        "name" : "health",
+        "at_least" : 50,
+        "at_most" : 80,
+        "target" : 0
+      }
+    },
+    "actions" : {
+      "1" : {
+        "name" : "delay"
+      }
+    }
+  },
+  "2" : {
+    "ship_id" : 1,
+    "conditions" : {
+      "1" : {
+        "name" : "ammunition_type",
+        "at_least" : 1,
+        "at_most" : null
+      }
+    },
+    "actions" : {
+
+    }
+  }
+}

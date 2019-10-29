@@ -1,5 +1,5 @@
 from Ship import Ship
-from repos.JSONComponentRepository import JSONComponentRepository
+from Repos.JSONComponentRepository import JSONComponentRepository
 
 
 class ShipFactory:
