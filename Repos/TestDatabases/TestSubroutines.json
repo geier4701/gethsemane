@@ -1,12 +1,14 @@
 {
   "1" : {
+    "subroutine_id" : 1,
     "ship_id" : 1,
+    "priority" : 1,
     "conditions" : {
       "1" : {
         "name" : "health",
         "at_least" : 50,
         "at_most" : 80,
-        "target" : 0
+        "target" : "SELF"
       }
     },
     "actions" : {
@@ -16,16 +18,25 @@
     }
   },
   "2" : {
+    "subroutine_id" : 2,
     "ship_id" : 1,
+    "priority" : 2,
     "conditions" : {
       "1" : {
-        "name" : "ammunition_type",
+        "name" : "ammunition_level",
         "at_least" : 1,
-        "at_most" : null
+        "at_most" : null,
+        "ammunition_type" : "RAIL"
+      },
+      "2" : {
+        "name" : "distance",
+        "at_least" : 1000,
+        "at_most" : 5000
       }
     },
     "actions" : {
-
+      "name" : "velocity_change",
+      "velocity_change" : [10, 15, 20]
     }
   }
 }

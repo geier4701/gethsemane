@@ -17,11 +17,4 @@ class EnergyLevel(Condition):
 		else:
 			raise Exception('Invalid ship target in EnergyLevel Conditions')
 		
-		result = False
-		if self.at_most is not None:
-			if target_ship.current_energy <= target_ship.current_energy:
-				result = True
-		elif self.at_least is not None:
-			if target_ship.current_energy >= target_ship.current_energy:
-				result = True
-		return result
+		return self.compare(target_ship.current_energy)

@@ -31,8 +31,8 @@ class JSONSubroutineRepository(SubroutineRepository):
 		subroutines = []
 		
 		subroutine_folder = Path(os.path.dirname(__file__))
-		with open(subroutine_folder / 'Repos/TestDatabases/TestSubroutines.json') as file:
-			raw_subroutines = json.load(file)
+		file = open(subroutine_folder / 'Repos/TestDatabases/TestSubroutines.json')
+		raw_subroutines = json.load(file)
 		
 		for raw_subroutine in raw_subroutines:
 			if raw_subroutine['ship_id'] == controlling_ship_id:

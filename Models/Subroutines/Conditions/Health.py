@@ -17,11 +17,4 @@ class Health(Condition):
 		else:
 			raise Exception('Invalid ship target in Health Conditions')
 		
-		result = False
-		if self.at_most is not None:
-			if target_ship.health <= target_ship.health:
-				result = True
-		elif self.at_least is not None:
-			if target_ship.health >= target_ship.health:
-				result = True
-		return result
+		return self.compare(target_ship.health)

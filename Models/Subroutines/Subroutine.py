@@ -5,14 +5,12 @@ from Subroutines.Conditions import Condition
 
 class Subroutine:
 	subroutine_id: int
-	name: str
 	ship_id: int
 	priority: int
 	conditions: List[Condition]
 	actions: List[Action]
 	
-	def __init__(self, subroutine_id, name, ship_id, priority, conditions, actions):
-		self.name = name
+	def __init__(self, subroutine_id, ship_id, priority, conditions, actions):
 		self.subroutine_id = subroutine_id
 		self.ship_id = ship_id
 		self.priority = priority

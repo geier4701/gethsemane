@@ -18,8 +18,26 @@ class Condition(ABC):
 	at_most: int
 	target: Target
 	
+	def compare(self, ships_value: int) -> bool:
+		at_least_result = False
+		at_most_result = False
+		
+		if self.at_most is None:
+			at_most_result = True
+		else:
+			if ships_value <= self.at_most:
+				at_most_result = True
+		
+		if self.at_least is None:
+			at_least_result = True
+		else:
+			if ships_value >= self.at_least:
+				at_least_result = True
+		
+		return at_least_result and at_most_result
+	
 	@abstractmethod
-	def test(self, own_ship: Ship, enemy_ship: Ship):
+	def test(self, own_ship: Ship, enemy_ship: Ship) -> bool:
 		pass
 	
 	@staticmethod
