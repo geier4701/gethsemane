@@ -26,7 +26,6 @@ class JSONSubroutineRepository(SubroutineRepository):
 		"delay": Delay
 	}
 	
-	# TODO: Write a subroutine Test Database and update this function
 	def get_subroutines(self, controlling_ship_id: int) -> List[Subroutine]:
 		subroutines = []
 		
@@ -41,16 +40,16 @@ class JSONSubroutineRepository(SubroutineRepository):
 				for raw_condition in raw_conditions:
 					condition_type = self.condition_library[raw_condition['name']]
 					condition_type: Condition
-					conditions.append(condition_type(raw_conditions['args']))
+					conditions.append(condition_type(*raw_condition['args']))
 				
 				raw_actions = raw_subroutine['actions']
 				actions = []
 				for raw_action in raw_actions:
-					act_type = self.action_library[raw_action['name']]
-					act_type: Action
-					actions.append(act_type(raw_actions['args']))
+					action_type = self.action_library[raw_action['name']]
+					action_type: Action
+					actions.append(action_type(*raw_action['args']))
 				
-				subroutine = Subroutine(raw_subroutine['subroutine_id'], raw_subroutine['name'], raw_subroutine['ship_id'], raw_subroutine['priority'], conditions, actions)
+				subroutine = Subroutine(raw_subroutine['subroutine_id'], raw_subroutine['ship_id'], raw_subroutine['priority'], conditions, actions)
 				subroutines.append(subroutine)
 		
 		file.close()

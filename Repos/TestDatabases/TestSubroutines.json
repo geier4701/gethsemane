@@ -6,14 +6,17 @@
     "conditions" : {
       "1" : {
         "name" : "health",
-        "at_least" : 50,
-        "at_most" : 80,
-        "target" : "SELF"
+        "args" : {
+          "at_least" : 50,
+          "at_most" : 80,
+          "target" : "SELF"
+        }
       }
     },
     "actions" : {
       "1" : {
-        "name" : "delay"
+        "name" : "delay",
+        "args" : null
       }
     }
   },
@@ -24,19 +27,25 @@
     "conditions" : {
       "1" : {
         "name" : "ammunition_level",
-        "at_least" : 1,
+        "args" : {
+          "at_least" : 1,
         "at_most" : null,
         "ammunition_type" : "RAIL"
+        }
       },
       "2" : {
         "name" : "distance",
-        "at_least" : 1000,
-        "at_most" : 5000
+        "args" : {
+          "at_least" : 1000,
+          "at_most" : 5000
+        }
       }
     },
     "actions" : {
       "name" : "velocity_change",
-      "velocity_change" : [10, 15, 20]
+      "args" : {
+        "velocity_change" : [10, 15, 20]
+      }
     }
   }
 }
