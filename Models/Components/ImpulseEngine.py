@@ -5,12 +5,12 @@ class ImpulseEngine(Component):
 	max_accel: int
 	energy_cost: int
 	
-	def __init__(self, component_id: int, name: str, mass: int, repair_cost: int, energy_cost: int, max_accel: int):
+	def __init__(self, component_id: int, name: str, mass: int, energy_cost: int, repair_cost: int, max_accel: int):
 		self.component_id = component_id
 		self.name = name
 		self.mass = mass
-		self.repair_cost = repair_cost
 		self.energy_cost = energy_cost
+		self.repair_cost = repair_cost
 		self.max_accel = max_accel
 		self.operational = True
 	
