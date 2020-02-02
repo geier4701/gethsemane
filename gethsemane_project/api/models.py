@@ -2,7 +2,7 @@ from django.db import models
 
 
 class ImpulseEngineModel(models.Model):
-	impulse_engine_id = models.IntegerField(primary_key=True, unique=True)
+	impulse_engine_id = models.AutoField(primary_key=True, unique=True)
 	name = models.CharField(max_length=100, unique=True)
 	mass = models.IntegerField()
 	energy_cost = models.IntegerField()
@@ -11,7 +11,7 @@ class ImpulseEngineModel(models.Model):
 
 
 class JumpDriveModel(models.Model):
-	jump_drive_id = models.IntegerField(primary_key=True, unique=True)
+	jump_drive_id = models.AutoField(primary_key=True, unique=True)
 	name = models.CharField(max_length=100, unique=True)
 	mass = models.IntegerField()
 	energy_cost = models.IntegerField()
@@ -19,7 +19,7 @@ class JumpDriveModel(models.Model):
 
 
 class WeaponModel(models.Model):
-	weapon_id: models.IntegerField(primary_key=True, unique=True)
+	weapon_id: models.AutoField(primary_key=True, unique=True)
 	name = models.CharField(max_length=100, unique=True)
 	mass = models.IntegerField()
 	energy_cost = models.IntegerField()
@@ -30,7 +30,7 @@ class WeaponModel(models.Model):
 
 
 class RadarModel(models.Model):
-	radar_id = models.IntegerField(primary_key=True, unique=True)
+	radar_id = models.AutoField(primary_key=True, unique=True)
 	name = models.CharField(max_length=100, unique=True)
 	mass = models.IntegerField()
 	energy_cost = models.IntegerField()
@@ -39,7 +39,7 @@ class RadarModel(models.Model):
 
 
 class ArmourModel(models.Model):
-	armour_id = models.IntegerField(primary_key=True, unique=True)
+	armour_id = models.AutoField(primary_key=True, unique=True)
 	name = models.CharField(max_length=100, unique=True)
 	mass = models.IntegerField()
 	repair_cost = models.IntegerField()
@@ -47,7 +47,7 @@ class ArmourModel(models.Model):
 
 
 class ShipTypeModel(models.Model):
-	ship_type_id = models.IntegerField(primary_key=True, unique=True)
+	ship_type_id = models.AutoField(primary_key=True, unique=True)
 	name = models.CharField(max_length=100, unique=True)
 	weight = models.IntegerField()
 	power_gen = models.IntegerField()
@@ -55,7 +55,7 @@ class ShipTypeModel(models.Model):
 
 
 class AmmunitionModel(models.Model):
-	ammunition_id = models.IntegerField(primary_key=True, unique=True)
+	ammunition_id = models.AutoField(primary_key=True, unique=True)
 	name = models.CharField(max_length=100, unique=True)
 	mass = models.IntegerField()
 	repair_cost = models.IntegerField()
@@ -64,7 +64,7 @@ class AmmunitionModel(models.Model):
 
 
 class ComputerModel(models.Model):
-	computer_id = models.IntegerField(primary_key=True, unique=True)
+	computer_id = models.AutoField(primary_key=True, unique=True)
 	name = models.CharField(max_length=100, unique=True)
 	mass = models.IntegerField()
 	repair_cost = models.IntegerField()
@@ -73,7 +73,7 @@ class ComputerModel(models.Model):
 
 
 class ShipModel(models.Model):
-	ship_id = models.IntegerField(primary_key=True, unique=True)
+	ship_id = models.AutoField(primary_key=True, unique=True)
 	health = models.IntegerField()
 	max_energy = models.IntegerField()
 	radar = models.ForeignKey(RadarModel, on_delete=models.CASCADE)
@@ -85,18 +85,18 @@ class ShipModel(models.Model):
 
 
 class SubroutineModel(models.Model):
-	subroutine_id = models.IntegerField(primary_key=True, unique=True)
+	subroutine_id = models.AutoField(primary_key=True, unique=True)
 	ship_id = models.ForeignKey(ShipModel, on_delete=models.CASCADE)
 	priority = models.IntegerField()
 
 
 class ConditionModel(models.Model):
-	condition_id = models.IntegerField(primary_key=True, unique=True)
+	condition_id = models.AutoField(primary_key=True, unique=True)
 	at_least = models.IntegerField()
 	at_most = models.IntegerField()
 	target = models.IntegerField(choices=[(0, 'SELF'), (1, 'ENEMY')])
 
 
 class ActionModel(models.Model):
-	action_id = models.IntegerField(primary_key=True, unique=True)
+	action_id = models.AutoField(primary_key=True, unique=True)
 	name = models.CharField(max_length=100, unique=True)
