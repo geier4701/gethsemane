@@ -1,11 +1,11 @@
 import math
 from abc import ABC, abstractmethod
 from enum import IntEnum
-from typing import List
+from typing import List, Optional
 
-from ...Components.Ammunition import AmmunitionType, Ammunition
-from ...Coordinates import Coordinates
-from ...Ship import Ship
+from api.ShipCombat.Models.Components.Ammunition import AmmunitionType, Ammunition
+from api.ShipCombat.Models.Coordinates import Coordinates
+from api.ShipCombat.Models.Ship import Ship
 
 
 class Target(IntEnum):
@@ -14,8 +14,8 @@ class Target(IntEnum):
 
 
 class Condition(ABC):
-	at_least: int
-	at_most: int
+	at_least: Optional[int]
+	at_most: Optional[int]
 	target: Target
 	
 	def compare(self, ships_value: int) -> bool:

@@ -1,5 +1,5 @@
-from .Ammunition import AmmunitionType
-from .Component import Component
+from api.ShipCombat.Models.Components.Ammunition import AmmunitionType
+from api.ShipCombat.Models.Components.Component import Component
 
 
 class Weapon(Component):

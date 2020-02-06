@@ -1,9 +1,10 @@
 from django.http import HttpResponse
-from .ShipCombat.Repos import JumpDriveRepository
+from api.ShipCombat.Repos.JumpDriveRepository import JumpDriveRepository
 
 # Create your views here.
 
 
 def linktest(request):
-	drive = JumpDriveRepository.getJumpDriveById(1)
+	repo = JumpDriveRepository()
+	drive = repo.find_by_id(1)
 	return HttpResponse(drive.name)

@@ -1,4 +1,4 @@
-from ..Models.Ship import Ship
+from api.ShipCombat.Models.Ship import Ship
 
 
 class ShipFactory:

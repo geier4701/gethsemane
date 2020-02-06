@@ -1,8 +1,8 @@
-from ....BLL.Horatio import Horatio
-from ...AttackInfo import AttackInfo
-from ...Components.Weapon import Weapon
-from .Action import Action
-from ..Conditions.Condition import Condition
+from api.ShipCombat.BLL.Horatio import Horatio
+from api.ShipCombat.Models.AttackInfo import AttackInfo
+from api.ShipCombat.Models.Components.Weapon import Weapon
+from api.ShipCombat.Models.Subroutines.Actions.Action import Action
+from api.ShipCombat.Models.Subroutines.Conditions.Condition import Condition
 
 
 class FireWeapon(Action):
@@ -10,7 +10,8 @@ class FireWeapon(Action):
 	weapon: Weapon
 	attack_info: AttackInfo
 	
-	def __init__(self, weapon: Weapon):
+	def __init__(self, action_id: int, weapon: Weapon):
+		self.action_id = action_id
 		self.weapon = weapon
 	
 	def activate(self, captain: Horatio, info=None):

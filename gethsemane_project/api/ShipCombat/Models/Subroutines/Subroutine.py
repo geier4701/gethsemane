@@ -1,7 +1,7 @@
 from typing import List
 
-from .Actions.Action import Action
-from .Conditions.Condition import Condition
+from api.ShipCombat.Models.Subroutines.Actions.Action import Action
+from api.ShipCombat.Models.Subroutines.Conditions.Condition import Condition
 
 
 class Subroutine:

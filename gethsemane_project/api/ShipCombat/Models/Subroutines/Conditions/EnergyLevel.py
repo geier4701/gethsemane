@@ -1,5 +1,5 @@
-from ...Ship import Ship
-from .Condition import Condition, Target
+from api.ShipCombat.Models.Ship import Ship
+from api.ShipCombat.Models.Subroutines.Conditions.Condition import Condition, Target
 
 
 class EnergyLevel(Condition):

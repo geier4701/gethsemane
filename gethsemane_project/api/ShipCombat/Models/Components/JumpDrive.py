@@ -1,4 +1,4 @@
-from ..Components.Component import Component
+from api.ShipCombat.Models.Components.Component import Component
 
 
 class JumpDrive(Component):

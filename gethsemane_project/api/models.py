@@ -74,29 +74,40 @@ class ComputerModel(models.Model):
 
 class ShipModel(models.Model):
 	ship_id = models.AutoField(primary_key=True, unique=True)
+	name = models.CharField(max_length=100)
 	health = models.IntegerField()
 	max_energy = models.IntegerField()
 	radar = models.ForeignKey(RadarModel, on_delete=models.CASCADE)
 	jump_drive = models.ForeignKey(JumpDriveModel, on_delete=models.CASCADE)
 	impulse_engine = models.ForeignKey(ImpulseEngineModel, on_delete=models.CASCADE)
 	computer = models.ForeignKey(ComputerModel, on_delete=models.CASCADE)
+	ship_type = models.ForeignKey(ShipTypeModel, on_delete=models.CASCADE)
 	weapons = models.ManyToManyField(WeaponModel)
 	ammunitions = models.ManyToManyField(AmmunitionModel)
 
 
 class SubroutineModel(models.Model):
 	subroutine_id = models.AutoField(primary_key=True, unique=True)
-	ship_id = models.ForeignKey(ShipModel, on_delete=models.CASCADE)
+	ship = models.ForeignKey(ShipModel, on_delete=models.CASCADE)
 	priority = models.IntegerField()
 
 
 class ConditionModel(models.Model):
 	condition_id = models.AutoField(primary_key=True, unique=True)
-	at_least = models.IntegerField()
-	at_most = models.IntegerField()
+	at_least = models.IntegerField(blank=True, null=True)
+	at_most = models.IntegerField(blank=True, null=True)
 	target = models.IntegerField(choices=[(0, 'SELF'), (1, 'ENEMY')])
+	component_type = models.CharField(
+		max_length=50,
+		choices=[('AT', 'AmmunitionType'), ('AR', 'Armour'), ('CO', 'Computer'), ('IE', 'ImpulseEngine'), ('JD', 'JumpDrive'), ('RA', 'Radar'), ('WE', 'Weapon')],
+		blank=True,
+		null=True
+	)
+	component_name = models.CharField(blank=True, null=True, max_length=100)
+	subroutine = models.ForeignKey(SubroutineModel, on_delete=models.CASCADE)
 
 
 class ActionModel(models.Model):
 	action_id = models.AutoField(primary_key=True, unique=True)
 	name = models.CharField(max_length=100, unique=True)
+	subroutines = models.ManyToManyField(SubroutineModel)

@@ -1,7 +1,7 @@
 from enum import IntEnum
 
-from .. import Coordinates
-from .Component import Component
+from api.ShipCombat.Models import Coordinates
+from api.ShipCombat.Models.Components.Component import Component
 
 
 class TrackingStyle(IntEnum):

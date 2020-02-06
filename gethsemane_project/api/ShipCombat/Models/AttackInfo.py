@@ -1,6 +1,6 @@
-from .Components.Ammunition import Ammunition
-from .Components.Weapon import Weapon
-from .Coordinates import Coordinates
+from api.ShipCombat.Models.Components.Ammunition import Ammunition
+from api.ShipCombat.Models.Components.Weapon import Weapon
+from api.ShipCombat.Models.Coordinates import Coordinates
 
 
 class AttackInfo:

@@ -1,13 +1,14 @@
-from ....BLL.Horatio import Horatio
-from ...Components.Radar import Radar
-from .Action import Action
+from api.ShipCombat.BLL.Horatio import Horatio
+from api.ShipCombat.Models.Components.Radar import Radar
+from api.ShipCombat.Models.Subroutines.Actions.Action import Action
 
 
 class Scan(Action):
 	name = "Scan"
 	radar: Radar
 	
-	def __init__(self, radar: Radar):
+	def __init__(self, action_id: int, radar: Radar):
+		self.action_id = action_id
 		self.radar = radar
 	
 	def activate(self, captain: Horatio, info=None):

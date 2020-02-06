@@ -1,6 +1,6 @@
 from enum import IntEnum
 
-from .Component import Component
+from api.ShipCombat.Models.Components.Component import Component
 
 
 class DamageType(IntEnum):

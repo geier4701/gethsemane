@@ -1,8 +1,8 @@
 from typing import List
 
-from ..Models.Ship import Ship
-from ..Models.Subroutines.Actions.Action import Action
-from ..Models.Subroutines.Subroutine import Subroutine
+from api.ShipCombat.Models.Ship import Ship
+from api.ShipCombat.Models.Subroutines.Actions.Action import Action
+from api.ShipCombat.Models.Subroutines.Subroutine import Subroutine
 
 
 class Horatio:

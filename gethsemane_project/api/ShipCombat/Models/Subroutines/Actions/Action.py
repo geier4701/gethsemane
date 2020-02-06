@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
 
-from ....BLL.Horatio import Horatio
+from api.ShipCombat.BLL.Horatio import Horatio
 
 
 class Action(ABC):
+	action_id: int
 	name: str
 	
 	@abstractmethod

@@ -1,14 +1,11 @@
-from abc import ABC, abstractmethod
 from typing import List
 
-from ..Models.Subroutines import Subroutine
+from api.models import SubroutineModel
 
 
-class SubroutineRepository(ABC):
-	@abstractmethod
-	def get_subroutines(self, controlling_ship_id: int) -> List[Subroutine]:
-		pass
+class SubroutineRepository:
+	def find_by_id(self, subroutine_id: int) -> SubroutineModel:
+		return SubroutineModel.objects.get(subroutine_id=subroutine_id)
 	
-	@abstractmethod
-	def get_subroutine(self, subroutine_id: int) -> Subroutine:
-		pass
+	def find_by_ship_id(self, ship_id: int) -> List[SubroutineModel]:
+		return SubroutineModel.objects.filter(ship_id=ship_id)

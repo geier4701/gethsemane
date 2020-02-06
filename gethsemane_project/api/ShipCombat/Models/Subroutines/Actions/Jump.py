@@ -1,11 +1,15 @@
-from ....BLL.Horatio import Horatio
-from .Action import Action
-from ...Components.JumpDrive import JumpDrive
+from api.ShipCombat.BLL.Horatio import Horatio
+from api.ShipCombat.Models.Subroutines.Actions.Action import Action
+from api.ShipCombat.Models.Components.JumpDrive import JumpDrive
 
 
 class Jump(Action):
 	name = "Jump"
 	jump_drive: JumpDrive
+	
+	def __init__(self, action_id: int, jump_drive: JumpDrive):
+		self.action_id = action_id
+		self.jump_drive = jump_drive
 	
 	def activate(self, captain: Horatio, info=None):
 		if captain.own_ship.current_energy >= captain.own_ship.impulse_engine.energy_cost:

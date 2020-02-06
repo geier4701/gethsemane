@@ -1,9 +1,9 @@
 from typing import List
 
-from .Horatio import Horatio
-from ..Models import Ship
-from ..Models.Components.Weapon import Weapon
-from ..Models.Subroutines.Actions import FireWeapon, Scan
+from api.ShipCombat.BLL.Horatio import Horatio
+from api.ShipCombat.Models import Ship
+from api.ShipCombat.Models.Components.Weapon import Weapon
+from api.ShipCombat.Models.Subroutines.Actions import FireWeapon, Scan
 
 
 class Xanatos:

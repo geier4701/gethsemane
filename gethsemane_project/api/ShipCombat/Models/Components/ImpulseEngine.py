@@ -1,4 +1,4 @@
-from .Component import Component
+from api.ShipCombat.Models.Components.Component import Component
 
 
 class ImpulseEngine(Component):
