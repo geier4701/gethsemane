@@ -19,6 +19,7 @@ class Xanatos:
 		while self.player_ship.health > 0 and self.opponent_ship.health > 0:
 			self.generate_energy()
 			self.move_ships()
+			# Faster computer goes first?
 			self.engage(player_captain.command(), player_captain, opponent_captain)
 			self.engage(opponent_captain.command(), opponent_captain, player_captain)
 	

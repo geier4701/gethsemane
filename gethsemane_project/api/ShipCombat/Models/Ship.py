@@ -11,7 +11,7 @@ from api.ShipCombat.Models.Subroutines import Subroutine
 
 
 class Ship:
-	ship_class: ShipType
+	ship_class: str
 	armament: List[Weapon]
 	ammunitions: List[Ammunition]
 	subroutines: List[Subroutine]
@@ -20,10 +20,12 @@ class Ship:
 	impulse_engine: ImpulseEngine
 	computer: Computer
 	location: Coordinates
-	max_energy: int
+	battery_max: int
 	current_energy: int
+	power_gen: int
 	health: int
 	name: str
+	weight: int
 	# FUTURE ADDITIONS
 	crew: dict
 	

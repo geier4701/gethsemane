@@ -55,6 +55,7 @@ class ShipTypeModel(models.Model):
 	health = models.IntegerField()
 
 
+# ADD COUNT ON AMMUNITION_SHIP BRIDGE TABLE
 class AmmunitionModel(models.Model):
 	ammunition_id = models.AutoField(primary_key=True, unique=True)
 	name = models.CharField(max_length=100, unique=True)
@@ -77,7 +78,6 @@ class ComputerModel(models.Model):
 class ShipModel(models.Model):
 	ship_id = models.AutoField(primary_key=True, unique=True)
 	name = models.CharField(max_length=100)
-	max_energy = models.IntegerField()
 	radar = models.ForeignKey(RadarModel, on_delete=models.CASCADE)
 	jump_drive = models.ForeignKey(JumpDriveModel, on_delete=models.CASCADE)
 	impulse_engine = models.ForeignKey(ImpulseEngineModel, on_delete=models.CASCADE)

@@ -12,7 +12,7 @@ class Horatio:
 	def __init__(self, ship: Ship):
 		self.own_ship = ship
 		self.enemy_intel = Ship()
-		self.own_ship.current_energy = self.own_ship.max_energy
+		self.own_ship.current_energy = self.own_ship.battery_max
 	
 	def command(self):
 		self.own_ship.subroutines.sort(key=lambda sub: subroutine.priority)
