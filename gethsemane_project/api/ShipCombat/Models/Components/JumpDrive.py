@@ -1,15 +1,16 @@
 from api.ShipCombat.Models.Components.Component import Component
+from api.models import JumpDriveModel
 
 
 class JumpDrive(Component):
 	energy_cost: int
 	
-	def __init__(self, component_id: int, name: str, mass: int, energy_cost: int, repair_cost: int):
-		self.component_id = component_id
-		self.name = name
-		self.mass = mass
-		self.energy_cost = energy_cost
-		self.repair_cost = repair_cost
+	def __init__(self, model: JumpDriveModel):
+		self.component_id = model.jump_drive_id
+		self.name = model.name
+		self.mass = model.mass
+		self.energy_cost = model.energy_cost
+		self.repair_cost = model.repair_cost
 		self.operational = True
 	
 	def get_stat_info(self):

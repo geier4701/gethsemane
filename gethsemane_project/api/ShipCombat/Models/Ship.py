@@ -6,26 +6,26 @@ from api.ShipCombat.Models.Components.Computer import Computer
 from api.ShipCombat.Models.Components.ImpulseEngine import ImpulseEngine
 from api.ShipCombat.Models.Components.JumpDrive import JumpDrive
 from api.ShipCombat.Models.Components.Radar import Radar
+from api.ShipCombat.Models.Components.Weapon import Weapon
 from api.ShipCombat.Models.Subroutines import Subroutine
 
 
 class Ship:
 	ship_class: ShipType
-	armament: dict
+	armament: List[Weapon]
 	ammunitions: List[Ammunition]
-	crew: dict
 	subroutines: List[Subroutine]
 	radar: Radar
 	jump_drive: JumpDrive
 	impulse_engine: ImpulseEngine
 	computer: Computer
 	location: Coordinates
-	impulse_speed: int
-	direction: int
 	max_energy: int
 	current_energy: int
 	health: int
 	name: str
+	# FUTURE ADDITIONS
+	crew: dict
 	
 	def __init__(self):
 		self.location = Coordinates.Coordinates(0, 0, 0)
@@ -40,6 +40,12 @@ class Ship:
 		
 		for weapon in self.armament:
 			components[weapon.name] = weapon
+		
+		for ammo in self.ammunitions:
+			if ammo.name not in components.keys:
+				components[ammo.name] = [ammo]
+			else:
+				components[ammo.name].append(ammo)
 		
 		return components
 	

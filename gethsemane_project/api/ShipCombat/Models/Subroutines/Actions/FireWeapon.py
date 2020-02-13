@@ -2,20 +2,23 @@ from api.ShipCombat.BLL.Horatio import Horatio
 from api.ShipCombat.Models.AttackInfo import AttackInfo
 from api.ShipCombat.Models.Components.Weapon import Weapon
 from api.ShipCombat.Models.Subroutines.Actions.Action import Action
-from api.ShipCombat.Models.Subroutines.Conditions.Condition import Condition
 
 
 class FireWeapon(Action):
 	name = "FireWeapon"
-	weapon: Weapon
+	weapon_name: str
 	attack_info: AttackInfo
+	ammunition_name: str
 	
-	def __init__(self, action_id: int, weapon: Weapon):
+	def __init__(self, action_id: int, weapon_name: str, ammunition_name: str):
 		self.action_id = action_id
-		self.weapon = weapon
+		self.weapon_name = weapon_name
+		self.ammunition_name = ammunition_name
 	
 	def activate(self, captain: Horatio, info=None):
-		ammo_to_check = Condition.get_ammunition(self.weapon.ammunition_type, captain.own_ship.ammunitions)
+		weapon: Weapon
+		weapon = captain.own_ship.get_components()[self.weapon_name]
+		ammo_to_check = captain.own_ship.get_components()[self.ammunition_name]
 		
 		ammo_to_use = None
 		for ammo in ammo_to_check:
@@ -23,4 +26,4 @@ class FireWeapon(Action):
 				ammo_to_use = ammo
 				break
 		
-		return AttackInfo(info, self.weapon, ammo_to_use)
+		return AttackInfo(info, weapon, ammo_to_use)

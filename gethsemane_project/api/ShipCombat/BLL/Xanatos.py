@@ -1,5 +1,3 @@
-from typing import List
-
 from api.ShipCombat.BLL.Horatio import Horatio
 from api.ShipCombat.Models import Ship
 from api.ShipCombat.Models.Components.Weapon import Weapon
@@ -19,8 +17,8 @@ class Xanatos:
 		opponent_captain = Horatio(self.opponent_ship)
 
 		while self.player_ship.health > 0 and self.opponent_ship.health > 0:
-			self.generate_energy([self.player_ship, self.opponent_ship])
-			self.move_ships([self.player_ship, self.opponent_ship])
+			self.generate_energy()
+			self.move_ships()
 			self.engage(player_captain.command(), player_captain, opponent_captain)
 			self.engage(opponent_captain.command(), opponent_captain, player_captain)
 	
@@ -33,22 +31,24 @@ class Xanatos:
 					# TODO: Implement armour
 					self.deal_damage(enemy_captain.own_ship, action_result.weapon)
 			if action is Scan and action_result is True:
-				captain.enemy_intel = enemy_captain.own_ship
+				captain.update_enemy_intel(enemy_captain.own_ship)
 	
-	def move_ships(self, ships: List[Ship]):
-		for ship in ships:
-			loc = 0
-			while loc < 3:
-				ship.location.location[loc] += ship.location.speed[loc]
-				loc += 1
-	
-	def generate_energy(self, ships: List[Ship]):
+	def generate_energy(self):
+		ships = [self.player_ship, self.opponent_ship]
 		for ship in ships:
 			energy = ship.current_energy + ship.ship_class.power_gen
 			if energy <= ship.ship_class.battery_max:
 				ship.current_energy = energy
 			else:
 				ship.current_energy = ship.ship_class.battery_max
+	
+	def move_ships(self):
+		ships = [self.player_ship, self.opponent_ship]
+		for ship in ships:
+			loc = 0
+			while loc < 3:
+				ship.location.location[loc] += ship.location.speed[loc]
+				loc += 1
 	
 	def deal_damage(self, ship: Ship, weapon: Weapon):
 		ship.health -= weapon.damage

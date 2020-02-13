@@ -52,6 +52,7 @@ class ShipTypeModel(models.Model):
 	weight = models.IntegerField()
 	power_gen = models.IntegerField()
 	battery_max = models.IntegerField()
+	health = models.IntegerField()
 
 
 class AmmunitionModel(models.Model):
@@ -61,6 +62,7 @@ class AmmunitionModel(models.Model):
 	repair_cost = models.IntegerField()
 	damage_type = models.IntegerField(choices=[(0, 'ENERGY'), (1, 'EXPLOSIVE'), (2, 'IMPACT'), (3, 'EWAR')])
 	ammunition_type = models.IntegerField(choices=[(0, 'CRYSTAL'), (1, 'MISSILE'), (2, 'RAIL'), (3, 'ELECTRIC')])
+	max_ammunition = models.IntegerField()
 
 
 class ComputerModel(models.Model):
@@ -75,7 +77,6 @@ class ComputerModel(models.Model):
 class ShipModel(models.Model):
 	ship_id = models.AutoField(primary_key=True, unique=True)
 	name = models.CharField(max_length=100)
-	health = models.IntegerField()
 	max_energy = models.IntegerField()
 	radar = models.ForeignKey(RadarModel, on_delete=models.CASCADE)
 	jump_drive = models.ForeignKey(JumpDriveModel, on_delete=models.CASCADE)
@@ -94,20 +95,17 @@ class SubroutineModel(models.Model):
 
 class ConditionModel(models.Model):
 	condition_id = models.AutoField(primary_key=True, unique=True)
+	name = models.CharField(max_length=100, choices=[('AL', 'AmmunitionLevel'), ('DI', 'Distance'), ('EL', 'EnergyLevel'), ('HE', 'Health'), ('ID', 'IsDisabled')])
 	at_least = models.IntegerField(blank=True, null=True)
 	at_most = models.IntegerField(blank=True, null=True)
-	target = models.IntegerField(choices=[(0, 'SELF'), (1, 'ENEMY')])
-	component_type = models.CharField(
-		max_length=50,
-		choices=[('AT', 'AmmunitionType'), ('AR', 'Armour'), ('CO', 'Computer'), ('IE', 'ImpulseEngine'), ('JD', 'JumpDrive'), ('RA', 'Radar'), ('WE', 'Weapon')],
-		blank=True,
-		null=True
-	)
+	target = models.IntegerField(choices=[(0, 'SELF'), (1, 'ENEMY')], blank=True, null=True)
 	component_name = models.CharField(blank=True, null=True, max_length=100)
 	subroutine = models.ForeignKey(SubroutineModel, on_delete=models.CASCADE)
 
 
 class ActionModel(models.Model):
 	action_id = models.AutoField(primary_key=True, unique=True)
-	name = models.CharField(max_length=100, unique=True)
-	subroutines = models.ManyToManyField(SubroutineModel)
+	name = models.CharField(max_length=100, choices=[('AR', 'AttemptRepairs'), ('DE', 'Delay'), ('FI', 'FireImpulse'), ('FW', 'FireWeapon'), ('JU', 'Jump'), ('SC', 'Scan')])
+	subroutines = models.ForeignKey(SubroutineModel, on_delete=models.CASCADE)
+	component_name = models.CharField(max_length=100, blank=True, null=True)
+	ammunition_name = models.CharField(max_length=100, blank=True, null=True)

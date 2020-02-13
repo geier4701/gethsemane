@@ -1,6 +1,7 @@
 from enum import IntEnum
 
 from api.ShipCombat.Models.Components.Component import Component
+from api.models import AmmunitionModel
 
 
 class DamageType(IntEnum):
@@ -22,14 +23,14 @@ class Ammunition(Component):
 	ammunition_type: AmmunitionType
 	remaining_ammo: int
 	
-	def __init__(self, component_id: int, name: str, mass: int, repair_cost: int, damage_type: DamageType, ammunition_type: AmmunitionType, remaining_ammo: int):
-		self.component_id = component_id
-		self.name = name
-		self.mass = mass
-		self.repair_cost = repair_cost
-		self.damage_type = damage_type
-		self.ammunition_type = ammunition_type
-		self.remaining_ammo = remaining_ammo
+	def __init__(self, model: AmmunitionModel):
+		self.component_id = model.ammunition_id
+		self.name = model.name
+		self.mass = model.mass
+		self.repair_cost = model.repair_cost
+		self.damage_type = DamageType(model.damage_type)
+		self.ammunition_type = AmmunitionType(model.ammunition_type)
+		self.remaining_ammo = model.max_ammunition
 		self.operational = True
 	
 	def get_stat_info(self):

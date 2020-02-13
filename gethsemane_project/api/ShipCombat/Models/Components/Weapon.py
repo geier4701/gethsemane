@@ -1,5 +1,6 @@
 from api.ShipCombat.Models.Components.Ammunition import AmmunitionType
 from api.ShipCombat.Models.Components.Component import Component
+from api.models import WeaponModel
 
 
 class Weapon(Component):
@@ -10,15 +11,15 @@ class Weapon(Component):
 	energy_cost: int
 	operational: bool
 	
-	def __init__(self, component_id: int, name: str, mass: int, energy_cost: int, repair_cost: int, damage: int, munition_velocity: int, ammunition_type: AmmunitionType):
-		self.component_id = component_id
-		self.name = name
-		self.mass = mass
-		self.energy_cost = energy_cost
-		self.repair_cost = repair_cost
-		self.damage = damage
-		self.munition_velocity = munition_velocity
-		self.ammunition_type = ammunition_type
+	def __init__(self, model: WeaponModel):
+		self.component_id = model.weapon_id
+		self.name = model.name
+		self.mass = model.mass
+		self.energy_cost = model.energy_cost
+		self.repair_cost = model.repair_cost
+		self.damage = model.damage
+		self.munition_velocity = model.munition_velocity
+		self.ammunition_type = model.ammunition_type
 		self.operational = True
 	
 	def get_stat_info(self):

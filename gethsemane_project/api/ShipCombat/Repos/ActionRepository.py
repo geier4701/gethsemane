@@ -4,11 +4,18 @@ from api.models import ActionModel
 
 
 class ActionRepository:
-	def find_all(self) -> List[ActionModel]:
+	@staticmethod
+	def find_all() -> List[ActionModel]:
 		return ActionModel.objects.all()
 	
-	def find_by_id(self, action_id: int) -> ActionModel:
+	@staticmethod
+	def find_by_id(action_id: int) -> ActionModel:
 		return ActionModel.objects.get(action_id=action_id)
 	
-	def find_by_name(self, action_name: str) -> ActionModel:
-		return ActionModel.objects.get(name=action_name)
+	@staticmethod
+	def find_by_name(action_name: str) -> ActionModel:
+		return ActionModel.objects.filter(name=action_name)
+	
+	@staticmethod
+	def find_by_subroutine(subroutine_id: int) -> List[ActionModel]:
+		return ActionModel.objects.filter(subroutine__id=subroutine_id)

@@ -46,12 +46,3 @@ class Condition(ABC):
 		y = coord2.location[1] - coord1.location[1]
 		z = coord2.location[2] - coord1.location[2]
 		return math.sqrt((x * x) + (y * y) + (z * z))
-	
-	@staticmethod
-	def get_ammunition(ammo_type: AmmunitionType, ammunitions: List[Ammunition]) -> List[Ammunition]:
-		to_test = []
-		for ammo in ammunitions:
-			if ammo.ammunition_type is ammo_type:
-				to_test.append(ammo)
-		
-		return to_test
