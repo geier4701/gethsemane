@@ -15,6 +15,7 @@ class Horatio:
 		self.own_ship.current_energy = self.own_ship.battery_max
 	
 	def command(self):
+		# TODO: Move subroutines to Horatio class on construction to avoid the circular dependency
 		self.own_ship.subroutines.sort(key=lambda sub: subroutine.priority)
 		actions_to_take = List[Action]
 		for subroutine in self.own_ship.subroutines:
@@ -36,7 +37,7 @@ class Horatio:
 	def update_enemy_intel(self, enemy_intel: Ship):
 		self.enemy_intel.current_energy = enemy_intel.current_energy
 		self.enemy_intel.health = enemy_intel.health
-		self.enemy_intel.location = enemy_intel.location
+		self.enemy_intel.coordinates = enemy_intel.coordinates
 		self.enemy_intel.radar.operational = enemy_intel.radar.operational
 		self.enemy_intel.jump_drive.operational = enemy_intel.jump_drive.operational
 		self.enemy_intel.impulse_engine.operational = enemy_intel.impulse_engine.operational

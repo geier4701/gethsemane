@@ -1,6 +1,6 @@
 from enum import IntEnum
 
-from api.ShipCombat.Models import Coordinates
+from api.ShipCombat.Models.Coordinates import Coordinates
 from api.ShipCombat.Models.Components.Component import Component
 from api.models import RadarModel
 
@@ -23,7 +23,7 @@ class Radar(Component):
 		self.repair_cost = model.repair_cost
 		self.tracking_style = TrackingStyle(model.tracking_style)
 		self.operational = True
-		self.enemy_coord = Coordinates.Coordinates(0, 0, 0)
+		self.enemy_coord = Coordinates(0, 0, 0, 0, 0, 0)
 	
 	def get_stat_info(self):
 		return {

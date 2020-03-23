@@ -1,14 +1,11 @@
 from api.ShipCombat.Models.Components.Ammunition import Ammunition
 from api.ShipCombat.Models.Components.Weapon import Weapon
-from api.ShipCombat.Models.Coordinates import Coordinates
 
 
 class AttackInfo:
-	coord: Coordinates
 	weapon: Weapon
 	ammo: Ammunition
 	
-	def __init__(self, coord: Coordinates, weapon: Weapon, ammo: Ammunition):
-		self.coord = coord
+	def __init__(self, weapon: Weapon, ammo: Ammunition):
 		self.weapon = weapon
 		self.ammo = ammo

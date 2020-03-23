@@ -27,9 +27,8 @@ class Xanatos:
 		for action in actions:
 			action_result = action.activate(captain, info)
 			if action is FireWeapon:
-				if action_result.coord == enemy_captain.own_ship.location and action_result.ammo is not None:
-					# TODO: Track weapons / Check enemy ship speed as well as location
-					# TODO: Implement armour
+				# TODO: Track weapons / Check enemy ship speed as well as location
+				if action_result.ammo is not None and action_result.weapon is not None and captain.enemy_intel.coordinates.location == enemy_captain.own_ship.coordinates:
 					self.deal_damage(enemy_captain.own_ship, action_result.weapon)
 			if action is Scan and action_result is True:
 				captain.update_enemy_intel(enemy_captain.own_ship)
@@ -52,4 +51,5 @@ class Xanatos:
 				loc += 1
 	
 	def deal_damage(self, ship: Ship, weapon: Weapon):
+		# TODO: Implement armour
 		ship.health -= weapon.damage

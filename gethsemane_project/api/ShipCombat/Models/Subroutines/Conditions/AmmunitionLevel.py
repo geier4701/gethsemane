@@ -1,4 +1,3 @@
-from api.ShipCombat.Models.Ship import Ship
 from api.ShipCombat.Models.Subroutines.Conditions.Condition import Condition, Target
 
 
@@ -11,7 +10,7 @@ class AmmunitionLevel(Condition):
 		self.ammunition_name = ammunition_name
 		self.target = Target.SELF
 	
-	def test(self, own_ship: Ship, enemy_ship: Ship):
+	def test(self, own_ship, enemy_ship):
 		munitions = own_ship.get_components()[self.ammunition_name]
 		
 		for munition in munitions:

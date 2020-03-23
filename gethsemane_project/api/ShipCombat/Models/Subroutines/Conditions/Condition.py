@@ -1,11 +1,9 @@
 import math
 from abc import ABC, abstractmethod
 from enum import IntEnum
-from typing import List, Optional
+from typing import Optional
 
-from api.ShipCombat.Models.Components.Ammunition import AmmunitionType, Ammunition
 from api.ShipCombat.Models.Coordinates import Coordinates
-from api.ShipCombat.Models.Ship import Ship
 
 
 class Target(IntEnum):
@@ -37,7 +35,7 @@ class Condition(ABC):
 		return at_least_result and at_most_result
 	
 	@abstractmethod
-	def test(self, own_ship: Ship, enemy_ship: Ship) -> bool:
+	def test(self, own_ship, enemy_ship) -> bool:
 		pass
 	
 	@staticmethod
@@ -46,3 +44,8 @@ class Condition(ABC):
 		y = coord2.location[1] - coord1.location[1]
 		z = coord2.location[2] - coord1.location[2]
 		return math.sqrt((x * x) + (y * y) + (z * z))
+	
+	@staticmethod
+	def find_desired_coord(desired_distance: int) -> Coordinates:
+		# TODO: FIGURE OUT ALGORITHM TO PLACE SHIP AT A DESIRED DISTANCE FROM ENEMY SHIP
+		pass

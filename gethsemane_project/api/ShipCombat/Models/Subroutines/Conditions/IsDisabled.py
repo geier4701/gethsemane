@@ -1,4 +1,3 @@
-from api.ShipCombat.Models.Ship import Ship
 from api.ShipCombat.Models.Subroutines.Conditions.Condition import Condition, Target
 
 
@@ -11,6 +10,13 @@ class IsDisabled(Condition):
 		self.target = target
 		self.component_name = component_name
 		
-	def test(self, own_ship: Ship, enemy_ship: Ship):
-		component = own_ship.get_components()[self.component_name]
-		return component.operational
+	def test(self, own_ship, enemy_ship):
+		named_components = own_ship.get_components()[self.component_name]
+		if hasattr(named_components, "__len__"):
+			for component in named_components:
+				if component.operational is False:
+					return True
+			return False
+		
+		else:
+			return named_components.operational

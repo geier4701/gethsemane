@@ -10,6 +10,7 @@ class Weapon(Component):
 	munition_velocity: int
 	energy_cost: int
 	operational: bool
+	has_fired: bool
 	
 	def __init__(self, model: WeaponModel):
 		self.component_id = model.weapon_id
@@ -21,6 +22,7 @@ class Weapon(Component):
 		self.munition_velocity = model.munition_velocity
 		self.ammunition_type = model.ammunition_type
 		self.operational = True
+		self.has_fired = False
 	
 	def get_stat_info(self):
 		pass

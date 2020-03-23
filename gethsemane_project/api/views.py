@@ -1,3 +1,5 @@
+from pprint import pprint
+
 from django.http import HttpResponse
 
 from api.ShipCombat.BLL.ShipFactory import ShipFactory
@@ -15,4 +17,4 @@ def linktest(request):
 	# drive = repo.find_by_id(1)
 	factory = ShipFactory(ShipRepository(), ShipTypeRepository(), SubroutineFactory(SubroutineRepository()))
 	ship = factory.load_ship('First Timer')
-	return ship
+	return HttpResponse(ship.name + ship.power_gen.__str__())

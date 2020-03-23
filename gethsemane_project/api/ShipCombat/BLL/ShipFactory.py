@@ -13,8 +13,6 @@ from api.models import WeaponModel, AmmunitionModel
 from api.ShipCombat.Repos.ShipTypeRepository import ShipTypeRepository
 
 
-# WHEN RETRIEVING/SAVING MULTIPLE WEAPONS WITH THE SAME NAME/ID, RANDOMLY ASSIGN THOSE NAMES ADDED NUMBERS
-# TO KEEP THEM APART DURING SUBROUTINES --- THIS ISN'T GOING TO WORK MAYBE JUST ALL WEAPONS ARE UNIQUE UGHHHHH
 class ShipFactory:
 	ship_repo: ShipRepository
 	ship_type_repo: ShipTypeRepository
@@ -26,8 +24,7 @@ class ShipFactory:
 		self.subroutine_factory = subroutine_factory
 	
 	def load_ship(self, ship_name: str):
-		ship_model = self.ship_repo.find_by_name(ship_name)
-		# ship_type_model = self.ship_type_repo.find_by_id(ship_model.ship_type)
+		ship_model = self.ship_repo.find_by_name(ship_name)[0]
 		
 		ship = Ship()
 		ship.name = ship_model.name
@@ -41,6 +38,7 @@ class ShipFactory:
 		ship.health = ship_model.ship_type.health
 		ship.weight = ship_model.ship_type.weight
 		
+		# TODO: Figure out how to correctly iterate over foreign keys (probably grab them separately by external id)
 		weapon_models: List[WeaponModel]
 		weapon_models = ship_model.weapons
 		for weapon_model in weapon_models:

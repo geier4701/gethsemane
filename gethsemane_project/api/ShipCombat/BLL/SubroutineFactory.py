@@ -1,3 +1,5 @@
+from typing import List
+
 from api.ShipCombat.Models.Coordinates import Coordinates
 from api.ShipCombat.Models.Subroutines.Actions.AttemptRepairs import AttemptRepairs
 from api.ShipCombat.Models.Subroutines.Actions.Delay import Delay
@@ -34,8 +36,8 @@ class SubroutineFactory:
 	
 	@staticmethod
 	def __build_fire_impulse(action_model: ActionModel):
-		integers = action_model.component_name.split(',')
-		return FireImpulse(action_model.action_id, Coordinates(integers[0], integers[1], integers[2]))
+		split_coords = action_model.component_name.split(',')
+		return FireImpulse(action_model.action_id, Coordinates(0, 0, 0, int(split_coords[0]), int(split_coords[1]), int(split_coords[2])))
 	
 	@staticmethod
 	def __build_fire_weapon(action_model: ActionModel):
@@ -43,11 +45,11 @@ class SubroutineFactory:
 	
 	@staticmethod
 	def __build_jump(action_model: ActionModel):
-		return Jump(action_model.action_id, action_model.component_name)
+		return Jump(action_model.action_id, int(action_model.component_name))
 	
 	@staticmethod
 	def __build_scan(action_model: ActionModel):
-		return Scan(action_model.action_id, action_model.component_name)
+		return Scan(action_model.action_id)
 	
 	# CONDITIONS
 	@staticmethod
@@ -71,12 +73,12 @@ class SubroutineFactory:
 		return IsDisabled(0, 0, condition_model.target, condition_model.component_name)
 	
 	__action_map = {
-		'AttemptRepairs': __build_attempt_repairs,
-		'Delay': __build_delay,
-		'FireImpulse': __build_fire_impulse,
-		'FireWeapon': __build_fire_weapon,
-		'Jump': __build_jump,
-		'Scan': __build_scan
+		AttemptRepairs.name: __build_attempt_repairs,
+		Delay.name: __build_delay,
+		FireImpulse.name: __build_fire_impulse,
+		FireWeapon.name: __build_fire_weapon,
+		Jump.name: __build_jump,
+		Scan.name: __build_scan
 	}
 	
 	__condition_map = {
@@ -87,7 +89,7 @@ class SubroutineFactory:
 		'IsDisabled': __build_is_disabled
 	}
 	
-	def build_subroutines_for_ship(self, ship_id: int):
+	def build_subroutines_for_ship(self, ship_id: int) -> List[Subroutine]:
 		actions = []
 		conditions = []
 		subroutines = []

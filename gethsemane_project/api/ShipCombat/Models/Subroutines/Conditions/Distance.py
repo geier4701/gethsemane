@@ -1,4 +1,3 @@
-from api.ShipCombat.Models.Ship import Ship
 from api.ShipCombat.Models.Subroutines.Conditions.Condition import Condition, Target
 
 
@@ -9,6 +8,6 @@ class Distance(Condition):
 		self.at_most = at_most
 		self.target = Target.SELF
 	
-	def test(self, own_ship: Ship, enemy_ship: Ship):
+	def test(self, own_ship, enemy_ship):
 		distance = self.calculate_distance(own_ship.location, enemy_ship.location)
 		return self.compare(int(distance))

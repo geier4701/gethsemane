@@ -1,4 +1,3 @@
-from api.ShipCombat.Models.Ship import Ship
 from api.ShipCombat.Models.Subroutines.Conditions.Condition import Condition, Target
 
 
@@ -9,7 +8,7 @@ class Health(Condition):
 		self.at_most = at_most
 		self.target = target
 	
-	def test(self, own_ship: Ship, enemy_ship: Ship):
+	def test(self, own_ship, enemy_ship):
 		if self.target == Target.SELF:
 			target_ship = own_ship
 		elif self.target == Target.ENEMY:
