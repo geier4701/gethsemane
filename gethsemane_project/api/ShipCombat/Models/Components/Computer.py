@@ -14,12 +14,3 @@ class Computer(Component):
 		self.speed = model.speed
 		self.capacity = model.capacity
 		self.operational = True
-	
-	def get_stat_info(self):
-		return {
-			"id": self.component_id,
-			"name": self.name,
-			"mass": self.mass,
-			"speed": self.speed,
-			"capacity": self.capacity
-		}

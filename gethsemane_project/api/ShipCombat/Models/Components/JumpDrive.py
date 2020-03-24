@@ -12,11 +12,3 @@ class JumpDrive(Component):
 		self.energy_cost = model.energy_cost
 		self.repair_cost = model.repair_cost
 		self.operational = True
-	
-	def get_stat_info(self):
-		return {
-			"id": self.component_id,
-			"name": self.name,
-			"mass": self.mass,
-			"jump_cost": self.energy_cost
-		}

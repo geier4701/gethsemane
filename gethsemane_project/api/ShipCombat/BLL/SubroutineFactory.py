@@ -26,50 +26,39 @@ class SubroutineFactory:
 		self.subroutine_repo = subroutine_repo
 	
 	# ACTIONS
-	@staticmethod
-	def __build_attempt_repairs(action_model: ActionModel):
+	def __build_attempt_repairs(self, action_model: ActionModel):
 		return AttemptRepairs(action_model.action_id, action_model.component_name)
 	
-	@staticmethod
-	def __build_delay(action_model: ActionModel):
+	def __build_delay(self, action_model: ActionModel):
 		return Delay(action_model.action_id)
 	
-	@staticmethod
-	def __build_fire_impulse(action_model: ActionModel):
+	def __build_fire_impulse(self, action_model: ActionModel):
 		split_coords = action_model.component_name.split(',')
 		return FireImpulse(action_model.action_id, Coordinates(0, 0, 0, int(split_coords[0]), int(split_coords[1]), int(split_coords[2])))
 	
-	@staticmethod
-	def __build_fire_weapon(action_model: ActionModel):
+	def __build_fire_weapon(self, action_model: ActionModel):
 		return FireWeapon(action_model.action_id, action_model.component_name, action_model.ammunition_name)
 	
-	@staticmethod
-	def __build_jump(action_model: ActionModel):
+	def __build_jump(self, action_model: ActionModel):
 		return Jump(action_model.action_id, int(action_model.component_name))
 	
-	@staticmethod
-	def __build_scan(action_model: ActionModel):
+	def __build_scan(self, action_model: ActionModel):
 		return Scan(action_model.action_id)
 	
 	# CONDITIONS
-	@staticmethod
-	def __build_ammunition_level(condition_model: ConditionModel):
+	def __build_ammunition_level(self, condition_model: ConditionModel):
 		return AmmunitionLevel(condition_model.at_least, condition_model.at_most, condition_model.component_name)
 	
-	@staticmethod
-	def __build_distance(condition_model: ConditionModel):
+	def __build_distance(self, condition_model: ConditionModel):
 		return Distance(condition_model.at_least, condition_model.at_most)
 	
-	@staticmethod
-	def __build_energy_level(condition_model: ConditionModel):
+	def __build_energy_level(self, condition_model: ConditionModel):
 		return EnergyLevel(condition_model.at_least, condition_model.at_most, condition_model.target)
 	
-	@staticmethod
-	def __build_health(condition_model: ConditionModel):
+	def __build_health(self, condition_model: ConditionModel):
 		return Health(condition_model.at_least, condition_model.at_most, condition_model.target)
 	
-	@staticmethod
-	def __build_is_disabled(condition_model: ConditionModel):
+	def __build_is_disabled(self, condition_model: ConditionModel):
 		return IsDisabled(0, 0, condition_model.target, condition_model.component_name)
 	
 	__action_map = {
@@ -82,11 +71,11 @@ class SubroutineFactory:
 	}
 	
 	__condition_map = {
-		'AmmunitionLevel': __build_ammunition_level,
-		'Distance': __build_distance,
-		'EnergyLevel': __build_energy_level,
-		'Health': __build_health,
-		'IsDisabled': __build_is_disabled
+		AmmunitionLevel.name: __build_ammunition_level,
+		Distance.name: __build_distance,
+		EnergyLevel.name: __build_energy_level,
+		Health.name: __build_health,
+		IsDisabled.name: __build_is_disabled
 	}
 	
 	def build_subroutines_for_ship(self, ship_id: int) -> List[Subroutine]:
@@ -100,11 +89,11 @@ class SubroutineFactory:
 			condition_models = ConditionRepository.find_by_subroutine(subroutine_model.subroutine_id)
 			for action_model in action_models:
 				build_action = self.__action_map[action_model.name]
-				actions.append(build_action(action_model))
+				actions.append(build_action(self, action_model))
 			
 			for condition_model in condition_models:
 				build_condition = self.__condition_map[condition_model.name]
-				conditions.append(build_condition(condition_model))
+				conditions.append(build_condition(self, condition_model))
 			
 			subroutines.append(Subroutine(subroutine_model.subroutine_id, subroutine_model.ship.ship_id, subroutine_model.priority, conditions, actions))
 		

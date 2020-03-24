@@ -14,15 +14,6 @@ class ImpulseEngine(Component):
 		self.repair_cost = model.repair_cost
 		self.max_accel = model.max_accel
 		self.operational = True
-	
-	def get_stat_info(self):
-		return {
-			"id": self.component_id,
-			"name": self.name,
-			"mass": self.mass,
-			"energy_cost": self.energy_cost,
-			"max_accel": self.max_accel
-		}
 
 # a few ways to go about it. 1. no generating power. All  battery operated ships, ensuring that they need to manage
 # energy as a resource. 2. power generation tied to ship class. You don't get to pick how much power is generated a

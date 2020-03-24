@@ -23,8 +23,5 @@ class Armour(Component):
 		self.armour_type = ArmourType(model.armour_type)
 		self.operational = True
 	
-	def get_stat_info(self):
-		pass
-	
-	# ARMOUR WILL HAVE STRAIGHT MASS REMOVED INSTEAD OF HAVING HP OR LOWERING DAMAGE
+	# ARMOUR WILL HAVE STRAIGHT MASS REMOVED INSTEAD OF HALVING HP OR LOWERING DAMAGE
 	# ONLY ELECTRICAL ARMOUR WILL BE REPAIRABLE

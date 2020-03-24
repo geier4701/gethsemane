@@ -24,12 +24,3 @@ class Radar(Component):
 		self.tracking_style = TrackingStyle(model.tracking_style)
 		self.operational = True
 		self.enemy_coord = Coordinates(0, 0, 0, 0, 0, 0)
-	
-	def get_stat_info(self):
-		return {
-			'id': self.component_id,
-			'name': self.name,
-			'mass': self.mass,
-			'tracking_style': self.tracking_style,
-			'energy_cost': self.energy_cost
-		}

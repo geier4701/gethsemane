@@ -32,6 +32,3 @@ class Ammunition(Component):
 		self.ammunition_type = AmmunitionType(model.ammunition_type)
 		self.remaining_ammo = model.max_ammunition
 		self.operational = True
-	
-	def get_stat_info(self):
-		pass

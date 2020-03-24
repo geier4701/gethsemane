@@ -8,10 +8,6 @@ class Component(ABC):
 	operational: bool
 	repair_cost: int
 	
-	@abstractmethod
-	def get_stat_info(self):
-		pass
-	
 	def disable(self):
 		self.operational = False
 	

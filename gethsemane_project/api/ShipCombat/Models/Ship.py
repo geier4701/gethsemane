@@ -40,6 +40,8 @@ class Ship:
 	
 	def __init__(self):
 		self.coordinates = Coordinates(0, 0, 0, 0, 0, 0)
+		self.armament = []
+		self.ammunitions = []
 	
 	def get_components(self) -> dict:
 		components = {
@@ -144,7 +146,3 @@ class Ship:
 	def activate(self, action: Action):
 		ship_action = self.__action_map[action.name]
 		return ship_action(action)
-	
-	def reset_weapons(self):
-		# TODO: Set all weapons has_fired to False
-		pass

@@ -22,10 +22,14 @@ class Xanatos:
 			# Faster computer goes first?
 			self.engage(player_captain.command(), player_captain, opponent_captain)
 			self.engage(opponent_captain.command(), opponent_captain, player_captain)
+			player_captain.reset_ship_weapons()
+			opponent_captain.reset_ship_weapons()
+		
+		# RETURN VICTOR AND BATTLE REPORT
 	
 	def engage(self, actions, captain: Horatio, enemy_captain: Horatio, info=None):
 		for action in actions:
-			action_result = action.activate(captain, info)
+			action_result = captain.own_ship.activate(action)
 			if action is FireWeapon:
 				# TODO: Track weapons / Check enemy ship speed as well as location
 				if action_result.ammo is not None and action_result.weapon is not None and captain.enemy_intel.coordinates.location == enemy_captain.own_ship.coordinates:
@@ -50,6 +54,7 @@ class Xanatos:
 				ship.location.location[loc] += ship.location.speed[loc]
 				loc += 1
 	
+	# MAYBE THIS SHOULD BE TAKE_DAMAGE() ON THE SHIP
 	def deal_damage(self, ship: Ship, weapon: Weapon):
 		# TODO: Implement armour
 		ship.health -= weapon.damage

@@ -15,6 +15,7 @@ class Condition(ABC):
 	at_least: Optional[int]
 	at_most: Optional[int]
 	target: Target
+	name: str
 	
 	def compare(self, ships_value: int) -> bool:
 		at_least_result = False
@@ -33,10 +34,6 @@ class Condition(ABC):
 				at_least_result = True
 		
 		return at_least_result and at_most_result
-	
-	@abstractmethod
-	def test(self, own_ship, enemy_ship) -> bool:
-		pass
 	
 	@staticmethod
 	def calculate_distance(coord1: Coordinates, coord2: Coordinates) -> float:

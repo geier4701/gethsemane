@@ -12,3 +12,6 @@ class WeaponRepository:
 	
 	def find_by_name(self, weapon_name: str) -> WeaponModel:
 		return WeaponModel.objects.get(name=weapon_name)
+	
+	def find_by_ship_id(self, ship_id: int) -> List[WeaponModel]:
+		return WeaponModel.objects.filter(shipmodel__ship_id=ship_id)
