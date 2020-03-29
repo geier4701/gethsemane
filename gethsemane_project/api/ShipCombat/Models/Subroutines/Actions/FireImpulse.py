@@ -3,7 +3,7 @@ from api.ShipCombat.Models.Subroutines.Actions.Action import Action
 
 
 class FireImpulse(Action):
-	name = "FI"
+	name = "FireImpulse"
 	velocity_change: Coordinates
 	
 	def __init__(self, action_id: int, velocity_change: Coordinates):

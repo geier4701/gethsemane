@@ -20,6 +20,6 @@ class Weapon(Component):
 		self.repair_cost = model.repair_cost
 		self.damage = model.damage
 		self.munition_velocity = model.munition_velocity
-		self.ammunition_type = model.ammunition_type
+		self.ammunition_type = AmmunitionType(int(model.ammunition_type))
 		self.operational = True
 		self.has_fired = False

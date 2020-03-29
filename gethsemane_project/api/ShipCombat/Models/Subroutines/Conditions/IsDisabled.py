@@ -3,7 +3,7 @@ from api.ShipCombat.Models.Subroutines.Conditions.Condition import Condition, Ta
 
 class IsDisabled(Condition):
 	component_name: str
-	name = 'ID'
+	name = 'IsDisabled'
 	
 	def __init__(self, at_least: int, at_most: int, target: Target, component_name: str):
 		self.at_least = at_least

@@ -2,7 +2,7 @@ from api.ShipCombat.Models.Subroutines.Conditions.Condition import Condition, Ta
 
 
 class EnergyLevel(Condition):
-	name = 'EL'
+	name = 'EnergyLevel'
 	
 	def __init__(self, at_least: int, at_most: int, target: Target):
 		self.at_least = at_least

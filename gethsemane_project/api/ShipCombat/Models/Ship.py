@@ -52,16 +52,16 @@ class Ship:
 		}
 		
 		for weapon in self.armament:
-			if weapon.name not in components.keys:
+			if weapon.name not in components:
 				components[weapon.name] = [weapon]
 			else:
 				components[weapon.name].append(weapon)
 		
 		for ammo in self.ammunitions:
-			if ammo.name not in components.keys:
-				components[ammo.name] = [ammo]
+			if ammo.ammunition_type not in components:
+				components[ammo.ammunition_type] = [ammo]
 			else:
-				components[ammo.name].append(ammo)
+				components[ammo.ammunition_type].append(ammo)
 		
 		return components
 	
@@ -100,7 +100,7 @@ class Ship:
 	def __attempt_repairs_ship(self, repair: AttemptRepairs) -> bool:
 		named_components = self.get_components()[repair.target_component_name]
 		target_component = None
-		if hasattr(named_components, "__len__"):
+		if isinstance(named_components, list):
 			for component in named_components:
 				if component.operational is False:
 					target_component = component
@@ -124,7 +124,7 @@ class Ship:
 			if component.has_fired is False:
 				target_weapon = component
 		
-		ammo_to_check = self.get_components()[target_weapon.ammunition_name]
+		ammo_to_check = self.get_components()[target_weapon.ammunition_type]
 		
 		ammo_to_use = None
 		for ammo in ammo_to_check:
@@ -145,4 +145,4 @@ class Ship:
 	
 	def activate(self, action: Action):
 		ship_action = self.__action_map[action.name]
-		return ship_action(action)
+		return ship_action(self, action)

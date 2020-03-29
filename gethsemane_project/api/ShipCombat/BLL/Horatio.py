@@ -1,5 +1,6 @@
 from typing import List
 
+from api.ShipCombat.BLL.BattleRecorder import BattleRecorder
 from api.ShipCombat.Models.Ship import Ship
 from api.ShipCombat.Models.Subroutines.Actions.Action import Action
 from api.ShipCombat.Models.Subroutines.Conditions.AmmunitionLevel import AmmunitionLevel
@@ -14,39 +15,47 @@ class Horatio:
 	own_ship: Ship
 	last_action: List[Action]
 	enemy_intel: Ship
+	battle_recorder: BattleRecorder
 	
-	def __init__(self, ship: Ship):
+	def __init__(self, ship: Ship, battle_recorder: BattleRecorder):
 		self.own_ship = ship
 		self.enemy_intel = Ship()
 		self.own_ship.current_energy = self.own_ship.battery_max
+		self.battle_recorder = battle_recorder
 	
 	def command(self):
-		# TODO: Move conditions to Horatio class on construction to avoid the circular dependency
-		self.own_ship.subroutines.sort(key=lambda sub: subroutine.priority)
-		actions_to_take = List[Action]
+		self.own_ship.subroutines.sort(key=lambda sub: sub.priority)
+		actions_to_take = []
 		for subroutine in self.own_ship.subroutines:
 			make_it_so = True
 			for condition in subroutine.conditions:
-				if not condition.test(self.own_ship, self.enemy_intel):
+				if not self.test_condition(condition):
 					make_it_so = False
 					break
 			
 			if make_it_so:
 				self.last_action = subroutine.actions
 				actions_to_take = subroutine.actions
+				break
 		
 		if not actions_to_take:
+			self.battle_recorder.record_test('NO ACTIONS TO TAKE')
 			actions_to_take = self.last_action
 		
 		return actions_to_take
 	
 	def update_enemy_intel(self, enemy_intel: Ship):
+		# ADD WEAPONS, NO WEAPON STATUS SINCE YOU CANT WRITE SUBROUTINE AGAINST WEAPON YOU DON'T KNOW EXISTS
 		self.enemy_intel.current_energy = enemy_intel.current_energy
 		self.enemy_intel.health = enemy_intel.health
 		self.enemy_intel.coordinates = enemy_intel.coordinates
+		self.enemy_intel.radar = enemy_intel.radar
 		self.enemy_intel.radar.operational = enemy_intel.radar.operational
+		self.enemy_intel.jump_drive = enemy_intel.jump_drive
 		self.enemy_intel.jump_drive.operational = enemy_intel.jump_drive.operational
+		self.enemy_intel.impulse_engine = enemy_intel.impulse_engine
 		self.enemy_intel.impulse_engine.operational = enemy_intel.impulse_engine.operational
+		self.enemy_intel.computer = enemy_intel.computer
 		self.enemy_intel.computer.operational = enemy_intel.computer.operational
 	
 	def reset_ship_weapons(self):
@@ -56,7 +65,7 @@ class Horatio:
 	def __is_disabled_check(self, condition: Condition) -> bool:
 		condition: IsDisabled
 		named_components = self.own_ship.get_components()[condition.component_name]
-		if hasattr(named_components, "__len__"):
+		if isinstance(named_components, list):
 			for component in named_components:
 				if component.operational is False:
 					return True
@@ -67,8 +76,7 @@ class Horatio:
 	
 	def __ammunition_level_check(self, condition: Condition):
 		condition: AmmunitionLevel
-		munitions = self.own_ship.get_components()[condition.ammunition_name]
-		
+		munitions = self.own_ship.get_components()[condition.ammunition_type]
 		for munition in munitions:
 			if condition.compare(munition.remaining_ammo):
 				return True
@@ -104,10 +112,10 @@ class Horatio:
 	
 	__condition_map = {
 		IsDisabled.name: __is_disabled_check,
-		AmmunitionLevel: __ammunition_level_check,
-		Distance: __distance_check,
-		EnergyLevel: __energy_level_check,
-		Health: __health_check
+		AmmunitionLevel.name: __ammunition_level_check,
+		Distance.name: __distance_check,
+		EnergyLevel.name: __energy_level_check,
+		Health.name: __health_check
 	}
 	
 	def test_condition(self, condition: Condition) -> bool:

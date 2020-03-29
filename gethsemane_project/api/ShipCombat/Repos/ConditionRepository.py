@@ -14,4 +14,4 @@ class ConditionRepository:
 
 	@staticmethod
 	def find_by_subroutine(subroutine_id: int) -> List[ConditionModel]:
-		return ConditionModel.objects.filter(subroutine__subroutine_id=subroutine_id)
+		return ConditionModel.objects.filter(subroutine_id=subroutine_id)

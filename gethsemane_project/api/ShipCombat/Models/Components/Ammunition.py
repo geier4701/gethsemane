@@ -29,6 +29,6 @@ class Ammunition(Component):
 		self.mass = model.mass
 		self.repair_cost = model.repair_cost
 		self.damage_type = DamageType(model.damage_type)
-		self.ammunition_type = AmmunitionType(model.ammunition_type)
+		self.ammunition_type = AmmunitionType(int(model.ammunition_type))
 		self.remaining_ammo = model.max_ammunition
 		self.operational = True

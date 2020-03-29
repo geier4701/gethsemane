@@ -18,4 +18,4 @@ class ActionRepository:
 	
 	@staticmethod
 	def find_by_subroutine(subroutine_id: int) -> List[ActionModel]:
-		return ActionModel.objects.filter(subroutines__subroutine_id=subroutine_id)
+		return ActionModel.objects.filter(subroutine_id=subroutine_id)

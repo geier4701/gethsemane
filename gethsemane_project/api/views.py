@@ -1,13 +1,11 @@
-from pprint import pprint
-
 from django.http import HttpResponse
 
+# Create your views here.
+from api.ShipCombat.BLL.BattleRecorder import BattleRecorder
 from api.ShipCombat.BLL.ShipFactory import ShipFactory
 from api.ShipCombat.BLL.SubroutineFactory import SubroutineFactory
+from api.ShipCombat.BLL.Xanatos import Xanatos
 from api.ShipCombat.Repos.AmmunitionRepository import AmmunitionRepository
-from api.ShipCombat.Repos.JumpDriveRepository import JumpDriveRepository
-
-# Create your views here.
 from api.ShipCombat.Repos.ShipRepository import ShipRepository
 from api.ShipCombat.Repos.ShipTypeRepository import ShipTypeRepository
 from api.ShipCombat.Repos.SubroutineRepository import SubroutineRepository
@@ -15,8 +13,6 @@ from api.ShipCombat.Repos.WeaponRepository import WeaponRepository
 
 
 def linktest(request):
-	# repo = JumpDriveRepository()
-	# drive = repo.find_by_id(1)
 	factory = ShipFactory(
 		ShipRepository(),
 		ShipTypeRepository(),
@@ -24,5 +20,11 @@ def linktest(request):
 		WeaponRepository(),
 		AmmunitionRepository()
 	)
-	ship = factory.load_ship('First Timer')
-	return HttpResponse(ship.name + ship.power_gen.__str__())
+	
+	ship1 = factory.load_ship('First Timer')
+	ship2 = factory.load_ship('Old Timer')
+	
+	xanatos = Xanatos(ship1, ship2, BattleRecorder())
+	winner = xanatos.gambit()
+	
+	return HttpResponse(winner + ' wins the game!')

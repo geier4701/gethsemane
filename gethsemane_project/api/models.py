@@ -106,6 +106,6 @@ class ConditionModel(models.Model):
 class ActionModel(models.Model):
 	action_id = models.AutoField(primary_key=True, unique=True)
 	name = models.CharField(max_length=100, choices=[('AR', 'AttemptRepairs'), ('DE', 'Delay'), ('FI', 'FireImpulse'), ('FW', 'FireWeapon'), ('JU', 'Jump'), ('SC', 'Scan')])
-	subroutines = models.ForeignKey(SubroutineModel, on_delete=models.CASCADE)
+	subroutine = models.ForeignKey(SubroutineModel, on_delete=models.CASCADE)
 	component_name = models.CharField(max_length=100, blank=True, null=True)
 	ammunition_name = models.CharField(max_length=100, blank=True, null=True)

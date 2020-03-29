@@ -79,20 +79,21 @@ class SubroutineFactory:
 	}
 	
 	def build_subroutines_for_ship(self, ship_id: int) -> List[Subroutine]:
-		actions = []
-		conditions = []
 		subroutines = []
 		subroutine_models = self.subroutine_repo.find_by_ship_id(ship_id)
 		
 		for subroutine_model in subroutine_models:
+			actions = []
+			conditions = []
+			
 			action_models = ActionRepository.find_by_subroutine(subroutine_model.subroutine_id)
 			condition_models = ConditionRepository.find_by_subroutine(subroutine_model.subroutine_id)
 			for action_model in action_models:
-				build_action = self.__action_map[action_model.name]
+				build_action = self.__action_map[action_model.get_name_display()]
 				actions.append(build_action(self, action_model))
 			
 			for condition_model in condition_models:
-				build_condition = self.__condition_map[condition_model.name]
+				build_condition = self.__condition_map[condition_model.get_name_display()]
 				conditions.append(build_condition(self, condition_model))
 			
 			subroutines.append(Subroutine(subroutine_model.subroutine_id, subroutine_model.ship.ship_id, subroutine_model.priority, conditions, actions))

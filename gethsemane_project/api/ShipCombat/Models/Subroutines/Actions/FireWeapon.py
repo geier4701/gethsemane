@@ -2,7 +2,7 @@ from api.ShipCombat.Models.Subroutines.Actions.Action import Action
 
 
 class FireWeapon(Action):
-	name = "FW"
+	name = "FireWeapon"
 	weapon_name: str
 	ammunition_name: str
 	
