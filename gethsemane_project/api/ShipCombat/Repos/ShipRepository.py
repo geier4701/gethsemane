@@ -13,6 +13,9 @@ class ShipRepository:
 	def find_by_name(self, ship_name: str) -> List[ShipModel]:
 		return ShipModel.objects.filter(name=ship_name)
 	
-	def find_by_user_and_name(self, user_name: str, ship_name: str):
+	def find_by_character_id(self, character_id: int) -> List[ShipModel]:
+		return ShipModel.objects.filter(character_id=character_id)
+	
+	def find_by_character_and_name(self, user_name: str, ship_name: str):
 		# THIS WILL TAKE OVER FIND_BY_NAME TO ALLOW FOR NON-UNIQUE NAMES
 		pass

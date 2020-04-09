@@ -20,6 +20,7 @@ from api.ShipCombat.Models.Subroutines.Subroutine import Subroutine
 
 
 class Ship:
+	ship_id: int
 	ship_class: str
 	armament: List[Weapon]
 	ammunitions: List[Ammunition]

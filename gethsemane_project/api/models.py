@@ -1,4 +1,13 @@
+from django.contrib.auth.models import User
 from django.db import models
+
+
+# TODO: Create game state and associate with a character
+class CharacterModel(models.Model):
+	character_id = models.IntegerField(primary_key=True, unique=True)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	first_name = models.CharField(max_length=20)
+	last_name = models.CharField(max_length=20)
 
 
 class ImpulseEngineModel(models.Model):
@@ -8,6 +17,7 @@ class ImpulseEngineModel(models.Model):
 	energy_cost = models.IntegerField()
 	repair_cost = models.IntegerField()
 	max_accel = models.IntegerField()
+	characters = models.ManyToManyField(CharacterModel)
 
 
 class JumpDriveModel(models.Model):
@@ -16,6 +26,7 @@ class JumpDriveModel(models.Model):
 	mass = models.IntegerField()
 	energy_cost = models.IntegerField()
 	repair_cost = models.IntegerField()
+	characters = models.ManyToManyField(CharacterModel)
 
 
 class WeaponModel(models.Model):
@@ -27,6 +38,7 @@ class WeaponModel(models.Model):
 	damage = models.IntegerField()
 	munition_velocity = models.IntegerField()
 	ammunition_type = models.IntegerField(choices=[(0, 'CRYSTAL'), (1, 'MISSILE'), (2, 'RAIL'), (3, 'ELECTRIC')])
+	characters = models.ManyToManyField(CharacterModel)
 
 
 class RadarModel(models.Model):
@@ -36,6 +48,7 @@ class RadarModel(models.Model):
 	energy_cost = models.IntegerField()
 	repair_cost = models.IntegerField()
 	tracking_style = models.IntegerField(choices=[(0, 'PASSIVE'), (1, 'ACTIVE')])
+	characters = models.ManyToManyField(CharacterModel)
 
 
 class ArmourModel(models.Model):
@@ -44,6 +57,7 @@ class ArmourModel(models.Model):
 	mass = models.IntegerField()
 	repair_cost = models.IntegerField()
 	armour_type = models.IntegerField(choices=[(0, 'REFLECTIVE'), (1, 'REACTIVE'), (2, 'ABLATIVE'), (3, 'CHARGED')])
+	characters = models.ManyToManyField(CharacterModel)
 
 
 class ShipTypeModel(models.Model):
@@ -53,6 +67,7 @@ class ShipTypeModel(models.Model):
 	power_gen = models.IntegerField()
 	battery_max = models.IntegerField()
 	health = models.IntegerField()
+	characters = models.ManyToManyField(CharacterModel)
 
 
 # ADD COUNT ON AMMUNITION_SHIP BRIDGE TABLE
@@ -64,6 +79,7 @@ class AmmunitionModel(models.Model):
 	damage_type = models.IntegerField(choices=[(0, 'ENERGY'), (1, 'EXPLOSIVE'), (2, 'IMPACT'), (3, 'EWAR')])
 	ammunition_type = models.IntegerField(choices=[(0, 'CRYSTAL'), (1, 'MISSILE'), (2, 'RAIL'), (3, 'ELECTRIC')])
 	max_ammunition = models.IntegerField()
+	characters = models.ManyToManyField(CharacterModel)
 
 
 class ComputerModel(models.Model):
@@ -73,6 +89,7 @@ class ComputerModel(models.Model):
 	repair_cost = models.IntegerField()
 	speed = models.IntegerField()
 	capacity = models.IntegerField()
+	characters = models.ManyToManyField(CharacterModel)
 
 
 class ShipModel(models.Model):
@@ -85,6 +102,7 @@ class ShipModel(models.Model):
 	ship_type = models.ForeignKey(ShipTypeModel, on_delete=models.CASCADE)
 	weapons = models.ManyToManyField(WeaponModel)
 	ammunitions = models.ManyToManyField(AmmunitionModel)
+	character = models.ForeignKey(CharacterModel, on_delete=models.CASCADE)
 
 
 class SubroutineModel(models.Model):

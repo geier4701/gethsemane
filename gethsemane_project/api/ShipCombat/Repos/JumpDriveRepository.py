@@ -12,3 +12,6 @@ class JumpDriveRepository:
 	
 	def find_by_name(self, jump_drive_name: str) -> JumpDriveModel:
 		return JumpDriveModel.objects.get(name=jump_drive_name)
+	
+	def find_by_character_id(self, character_id: int) -> List[JumpDriveModel]:
+		return JumpDriveModel.objects.filter(character_id=character_id)

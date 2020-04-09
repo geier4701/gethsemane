@@ -12,3 +12,6 @@ class ImpulseEngineRepository:
 	
 	def find_by_name(self, impulse_engine_name: str) -> ImpulseEngineModel:
 		return ImpulseEngineModel.objects.get(name=impulse_engine_name)
+	
+	def find_by_character_id(self, character_id: int) -> List[ImpulseEngineModel]:
+		return ImpulseEngineModel.objects.filter(character_id=character_id)

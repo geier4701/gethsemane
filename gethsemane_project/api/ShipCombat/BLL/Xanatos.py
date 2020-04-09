@@ -14,11 +14,11 @@ class Xanatos:
 	opponent_ship: Ship
 	battle_recorder: BattleRecorder
 	
-	def __init__(self, player: Ship, opponent: Ship, battle_recorder: BattleRecorder):
-		self.player_ship = player
+	def __init__(self, player_ship: Ship, opponent_ship: Ship, battle_recorder: BattleRecorder):
+		self.player_ship = player_ship
 		from api.ShipCombat.Models.Coordinates import Coordinates
 		self.player_ship.coordinates = Coordinates(100, 100, 100, 0, 0, 0)
-		self.opponent_ship = opponent
+		self.opponent_ship = opponent_ship
 		self.opponent_ship.coordinates = Coordinates(-100, -100, -100, 0, 0, 0)
 		self.battle_recorder = battle_recorder
 	
@@ -46,6 +46,8 @@ class Xanatos:
 			victor = 'cpu'
 		
 		self.battle_recorder.export_battle(victor)
+		
+		# TODO: Update progression of story
 		return victor
 	
 	def engage(self, actions: List[Action], captain: Horatio, enemy_captain: Horatio):

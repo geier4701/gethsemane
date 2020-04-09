@@ -12,3 +12,6 @@ class ComputerRepository:
 	
 	def find_by_name(self, computer_name: str) -> ComputerModel:
 		return ComputerModel.objects.get(name=computer_name)
+	
+	def find_by_character_id(self, character_id: int) -> List[ComputerModel]:
+		return ComputerModel.objects.filter(character_id=character_id)

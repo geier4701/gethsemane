@@ -46,6 +46,7 @@ class BattleRecorder:
 
 		self.battle_record.append(ActionRecord(success, ship.coordinates, component_states, ship.health, action.name, target))
 	
+	# TODO: This needs to refactored to something savable/consumable on the front end
 	def export_battle(self, victor: str) -> None:
 		now = datetime.now()
 		f = open("battle_" + str(datetime.timestamp(now)), "w+")

@@ -15,3 +15,6 @@ class WeaponRepository:
 	
 	def find_by_ship_id(self, ship_id: int) -> List[WeaponModel]:
 		return WeaponModel.objects.filter(shipmodel__ship_id=ship_id)
+	
+	def find_by_character_id(self, character_id: int) -> List[WeaponModel]:
+		return WeaponModel.objects.filter(character_id=character_id)

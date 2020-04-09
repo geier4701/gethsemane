@@ -12,3 +12,6 @@ class RadarRepository:
 	
 	def find_by_name(self, computer_name: str) -> RadarModel:
 		return RadarModel.objects.get(name=computer_name)
+	
+	def find_by_character_id(self, character_id: int) -> List[RadarModel]:
+		return RadarModel.objects.filter(character_id=character_id)

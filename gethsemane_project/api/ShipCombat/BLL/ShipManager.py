@@ -11,11 +11,11 @@ from api.ShipCombat.Models.Ship import Ship
 from api.ShipCombat.Repos.AmmunitionRepository import AmmunitionRepository
 from api.ShipCombat.Repos.ShipRepository import ShipRepository
 from api.ShipCombat.Repos.WeaponRepository import WeaponRepository
-from api.models import WeaponModel, AmmunitionModel
+from api.models import WeaponModel, AmmunitionModel, ShipModel
 from api.ShipCombat.Repos.ShipTypeRepository import ShipTypeRepository
 
 
-class ShipFactory:
+class ShipManager:
 	ship_repo: ShipRepository
 	ship_type_repo: ShipTypeRepository
 	subroutine_factory: SubroutineFactory
@@ -36,10 +36,27 @@ class ShipFactory:
 		self.weapon_repo = weapon_repo
 		self.ammo_repo = ammo_repo
 	
-	def load_ship(self, ship_name: str):
-		ship_model = self.ship_repo.find_by_name(ship_name)[0]
+	def load_ship(self, ship_id: int) -> Ship:
+		ship_model = self.ship_repo.find_by_id(ship_id)
+		return self.build_ship(ship_model)
+	
+	def load_ships_by_character_id(self, character_id: int) -> List[Ship]:
+		ships = []
+		ship_models = self.ship_repo.find_by_character_id(character_id)
+		for ship_model in ship_models:
+			ships.append(self.build_ship(ship_model))
 		
+		return ships
+	
+	def create_ship(self):
+		pass
+	
+	def update_ship(self, created_ship: Ship):
+		pass
+	
+	def build_ship(self, ship_model: ShipModel) -> Ship:
 		ship = Ship()
+		ship.ship_id = ship_model.ship_id
 		ship.name = ship_model.name
 		ship.ship_class = ship_model.ship_type.name
 		ship.radar = Radar(ship_model.radar)
@@ -64,9 +81,3 @@ class ShipFactory:
 		ship.subroutines = self.subroutine_factory.build_subroutines_for_ship(ship_model.ship_id)
 		
 		return ship
-	
-	def create_ship(self):
-		pass
-	
-	def update_ship(self, created_ship: Ship):
-		pass

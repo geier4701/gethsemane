@@ -12,3 +12,6 @@ class ArmourRepository:
 	
 	def find_by_name(self, armour_name: str) -> ArmourModel:
 		return ArmourModel.objects.get(name=armour_name)
+	
+	def find_by_character_id(self, character_id: int) -> List[ArmourModel]:
+		return ArmourModel.objects.filter(character_id=character_id)
