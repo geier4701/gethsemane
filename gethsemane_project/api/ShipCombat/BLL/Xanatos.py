@@ -27,7 +27,7 @@ class Xanatos:
 		opponent_captain = Horatio(self.opponent_ship, self.battle_recorder)
 		
 		round_count = 0
-		while self.player_ship.health > 0 and self.opponent_ship.health > 0 and round_count < 100:
+		while self.player_ship.ship_class.health > 0 and self.opponent_ship.ship_class.health > 0 and round_count < 100:
 			self.generate_energy()
 			self.move_ships()
 			# Faster computer goes first?
@@ -40,11 +40,12 @@ class Xanatos:
 		
 		if round_count == 100:
 			victor = 'DRAW'
-		elif self.player_ship.health > 0:
+		elif self.player_ship.ship_class.health > 0:
 			victor = 'player'
 		else:
 			victor = 'cpu'
 		
+		# TODO: Record battle in a meaningful format and return instead of victor
 		self.battle_recorder.export_battle(victor)
 		
 		# TODO: Update progression of story
@@ -71,11 +72,11 @@ class Xanatos:
 	def generate_energy(self):
 		ships = [self.player_ship, self.opponent_ship]
 		for ship in ships:
-			energy = ship.current_energy + ship.power_gen
-			if energy <= ship.battery_max:
+			energy = ship.current_energy + ship.ship_class.power_gen
+			if energy <= ship.ship_class.battery_max:
 				ship.current_energy = energy
 			else:
-				ship.current_energy = ship.battery_max
+				ship.current_energy = ship.ship_class.battery_max
 	
 	def move_ships(self):
 		ships = [self.player_ship, self.opponent_ship]
@@ -88,4 +89,4 @@ class Xanatos:
 	# MAYBE THIS SHOULD BE TAKE_DAMAGE() ON THE SHIP
 	def deal_damage(self, ship: Ship, weapon: Weapon):
 		# TODO: Implement armour
-		ship.health -= weapon.damage
+		ship.ship_class.health -= weapon.damage

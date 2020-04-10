@@ -40,11 +40,11 @@ class BattleRecorder:
 	def record_action(self, success: bool, ship: Ship, action: Action, target: Coordinates = None) -> None:
 		component_states = [
 			ship.name,
-			"Health: " + str(ship.health),
+			"Health: " + str(ship.ship_class.health),
 			"Energy: " + str(ship.current_energy)
 		]
 
-		self.battle_record.append(ActionRecord(success, ship.coordinates, component_states, ship.health, action.name, target))
+		self.battle_record.append(ActionRecord(success, ship.coordinates, component_states, ship.ship_class.health, action.name, target))
 	
 	# TODO: This needs to refactored to something savable/consumable on the front end
 	def export_battle(self, victor: str) -> None:

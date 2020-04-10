@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
 	# For testing
-	path('linktest/', views.linktest, name='test'),
+	path('linktest/', views.linktest),
 	
 	# Load all saved ships for a character
 	path('character/<int:character_id>/', views.loadships),
@@ -12,20 +12,14 @@ urlpatterns = [
 	# Load all available parts for creating a ship
 	path('character/<int:character_id/components/', views.loadcomponents),
 	
-	# TODO: Get all available ship types for creating a ship
-	# path('character/<int:character_id>/shiptypes/'),
+	# Get all available ship types for creating a ship
+	path('character/<int:character_id>/shipclasses/', views.getshipclasses),
 	
-	# TODO: Save a new ship
-	# path('character/<int:character_id/ship/'),
+	# Save or update a ship
+	path('character/<int:character_id/ship/', views.saveship),
 	
 	# Load a specific, built ship
-	path('ship/<int:ship_id>/', views.loadship, name='loadship'),
-	
-	# TODO: Load all components for a completed ship (maybe? what purpose will this serve?)
-	# path('ship/<int:ship_id/components/'),
-	
-	# TODO: Load all subroutines for a completed ship (maybe? what purpose will this serve?)
-	# path('ship/<int:ship_id>/subroutines/'),
+	path('ship/<int:ship_id>/', views.loadship),
 	
 	# TODO: Load cpu ship (this format needs more thought)
 	# path('cpu/<int:last_battle_id>/'),

@@ -8,6 +8,7 @@ from api.ShipCombat.Models.Components.ImpulseEngine import ImpulseEngine
 from api.ShipCombat.Models.Components.JumpDrive import JumpDrive
 from api.ShipCombat.Models.Components.Radar import Radar
 from api.ShipCombat.Models.Components.Weapon import Weapon
+from api.ShipCombat.Models.ShipType import ShipType
 from api.ShipCombat.Models.Subroutines.Actions.Action import Action
 from api.ShipCombat.Models.Subroutines.Actions.AttemptRepairs import AttemptRepairs
 from api.ShipCombat.Models.Subroutines.Actions.Delay import Delay
@@ -21,7 +22,7 @@ from api.ShipCombat.Models.Subroutines.Subroutine import Subroutine
 
 class Ship:
 	ship_id: int
-	ship_class: str
+	ship_class: ShipType
 	armament: List[Weapon]
 	ammunitions: List[Ammunition]
 	subroutines: List[Subroutine]
@@ -30,12 +31,8 @@ class Ship:
 	impulse_engine: ImpulseEngine
 	computer: Computer
 	coordinates: Coordinates
-	battery_max: int
 	current_energy: int
-	power_gen: int
-	health: int
 	name: str
-	weight: int
 	# FUTURE ADDITIONS
 	crew: dict
 	

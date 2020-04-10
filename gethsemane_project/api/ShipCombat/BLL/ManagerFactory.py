@@ -1,9 +1,13 @@
 from api.ShipCombat.BLL.ComponentManager import ComponentManager
+from api.ShipCombat.BLL.ShipClassManager import ShipClassManager
 from api.ShipCombat.BLL.ShipManager import ShipManager
+from api.ShipCombat.BLL.ShipValidator import ShipValidator
 from api.ShipCombat.BLL.SubroutineFactory import SubroutineFactory
+from api.ShipCombat.Repos.ActionRepository import ActionRepository
 from api.ShipCombat.Repos.AmmunitionRepository import AmmunitionRepository
 from api.ShipCombat.Repos.ArmourRepository import ArmourRepository
 from api.ShipCombat.Repos.ComputerRepository import ComputerRepository
+from api.ShipCombat.Repos.ConditionRepository import ConditionRepository
 from api.ShipCombat.Repos.ImpulseEngineRepository import ImpulseEngineRepository
 from api.ShipCombat.Repos.JumpDriveRepository import JumpDriveRepository
 from api.ShipCombat.Repos.RadarRepository import RadarRepository
@@ -18,10 +22,14 @@ class ManagerFactory:
 	def create_ship_manager_default() -> ShipManager:
 		return ShipManager(
 			ShipRepository(),
-			ShipTypeRepository(),
-			SubroutineFactory(SubroutineRepository()),
+			SubroutineFactory(
+				SubroutineRepository(),
+				ConditionRepository(),
+				ActionRepository()
+			),
 			WeaponRepository(),
-			AmmunitionRepository()
+			AmmunitionRepository(),
+			ShipValidator()
 		)
 	
 	@staticmethod
@@ -35,3 +43,7 @@ class ManagerFactory:
 			WeaponRepository(),
 			AmmunitionRepository()
 		)
+	
+	@staticmethod
+	def create_ship_class_manager_default() -> ShipClassManager:
+		return ShipClassManager(ShipTypeRepository())

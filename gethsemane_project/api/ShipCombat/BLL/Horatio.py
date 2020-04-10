@@ -20,7 +20,7 @@ class Horatio:
 	def __init__(self, ship: Ship, battle_recorder: BattleRecorder):
 		self.own_ship = ship
 		self.enemy_intel = Ship()
-		self.own_ship.current_energy = self.own_ship.battery_max
+		self.own_ship.current_energy = self.own_ship.ship_class.battery_max
 		self.battle_recorder = battle_recorder
 	
 	def command(self):
@@ -45,9 +45,9 @@ class Horatio:
 		return actions_to_take
 	
 	def update_enemy_intel(self, enemy_intel: Ship):
-		# ADD WEAPONS, NO WEAPON STATUS SINCE YOU CANT WRITE SUBROUTINE AGAINST WEAPON YOU DON'T KNOW EXISTS
+		# TODO: Add weapons, no weapon status since you cant write a subroutine against a weapon you don't know exists
 		self.enemy_intel.current_energy = enemy_intel.current_energy
-		self.enemy_intel.health = enemy_intel.health
+		self.enemy_intel.ship_class = enemy_intel.ship_class
 		self.enemy_intel.coordinates = enemy_intel.coordinates
 		self.enemy_intel.radar = enemy_intel.radar
 		self.enemy_intel.radar.operational = enemy_intel.radar.operational
@@ -108,7 +108,7 @@ class Horatio:
 		else:
 			raise Exception('Invalid ship target in Health Conditions')
 		
-		return condition.compare(target_ship.health)
+		return condition.compare(target_ship.ship_class.health)
 	
 	__condition_map = {
 		IsDisabled.name: __is_disabled_check,
