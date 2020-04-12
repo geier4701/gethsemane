@@ -3,6 +3,7 @@ from api.ShipCombat.Models.Subroutines.Actions.Action import Action
 
 class Jump(Action):
 	name = "Jump"
+	# TODO: Orient based on direction travelling as well
 	distance_from_enemy: int
 	
 	def __init__(self, action_id: int, distance_from_enemy: int):

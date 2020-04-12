@@ -105,6 +105,7 @@ class ShipModel(models.Model):
 	character = models.ForeignKey(CharacterModel, on_delete=models.CASCADE)
 
 
+# TODO: Attach a subroutine to a profile and a profile to a ship instead of a subroutine to a ship
 class SubroutineModel(models.Model):
 	subroutine_id = models.AutoField(primary_key=True, unique=True)
 	ship = models.ForeignKey(ShipModel, on_delete=models.CASCADE)

@@ -1,5 +1,5 @@
 import math
-from abc import ABC, abstractmethod
+from abc import ABC
 from enum import IntEnum
 from typing import Optional
 
