@@ -1,5 +1,5 @@
 from api.ShipCombat.BLL.ComponentManager import ComponentManager
-from api.ShipCombat.BLL.ShipClassManager import ShipClassManager
+from api.ShipCombat.BLL.ShipTypeManager import ShipTypeManager
 from api.ShipCombat.BLL.ShipManager import ShipManager
 from api.ShipCombat.BLL.ShipValidator import ShipValidator
 from api.ShipCombat.BLL.SubroutineFactory import SubroutineFactory
@@ -45,5 +45,5 @@ class ManagerFactory:
 		)
 	
 	@staticmethod
-	def create_ship_class_manager_default() -> ShipClassManager:
-		return ShipClassManager(ShipTypeRepository())
+	def create_ship_class_manager_default() -> ShipTypeManager:
+		return ShipTypeManager(ShipTypeRepository())

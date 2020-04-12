@@ -5,6 +5,7 @@ from api.ShipCombat.Models.Components.Component import Component
 from api.models import RadarModel
 
 
+# TODO: Implement passive radar
 class TrackingStyle(IntEnum):
 	PASSIVE = 0
 	ACTIVE = 1

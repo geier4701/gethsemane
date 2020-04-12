@@ -1,7 +1,7 @@
 from django.http import HttpResponse, JsonResponse, HttpRequest
 from django.views.decorators.http import require_http_methods
 
-from api.ShipCombat.BLL.APIObjectFormatter import APIObjectFormatter
+from api.ShipCombat.BLL import APIObjectFormatter
 from api.ShipCombat.BLL.BattleRecorder import BattleRecorder
 from api.ShipCombat.BLL.ManagerFactory import ManagerFactory
 from api.ShipCombat.BLL.Xanatos import Xanatos
@@ -43,9 +43,10 @@ def runbattle(request: HttpRequest, player_ship_id: int, opponent_ship_id: int):
 	return HttpResponse(victor)
 
 
+@require_http_methods(["GET"])
 def getshipclasses(request: HttpRequest, character_id: int):
 	ship_class_manager = ManagerFactory.create_ship_class_manager_default()
-	ship_classes = ship_class_manager.get_available_ship_classes(character_id)
+	ship_classes = ship_class_manager.get_available_ship_types(character_id)
 	return JsonResponse(APIObjectFormatter.format_ship_classes(ship_classes))
 
 
