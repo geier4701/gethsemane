@@ -1,8 +1,8 @@
 import json
 from typing import List
 
+from api.ShipCombat.BLL.ProgramManager import ProgramManager
 from api.ShipCombat.BLL.ShipValidator import ShipValidator
-from api.ShipCombat.BLL.SubroutineFactory import SubroutineFactory
 from api.ShipCombat.Exceptions.FailedToSaveException import FailedToSaveException
 from api.ShipCombat.Models.Components.Ammunition import Ammunition
 from api.ShipCombat.Models.Components.Computer import Computer
@@ -15,29 +15,29 @@ from api.ShipCombat.Models.ShipType import ShipType
 from api.ShipCombat.Repos.AmmunitionRepository import AmmunitionRepository
 from api.ShipCombat.Repos.ShipRepository import ShipRepository
 from api.ShipCombat.Repos.WeaponRepository import WeaponRepository
-from api.models import WeaponModel, AmmunitionModel, ShipModel
+from api.models import WeaponModel, AmmunitionModel, ShipModel, ProgramModel
 
 
 class ShipManager:
 	ship_repo: ShipRepository
-	subroutine_factory: SubroutineFactory
 	weapon_repo: WeaponRepository
 	ammo_repo: AmmunitionRepository
 	ship_validator: ShipValidator
+	program_manager: ProgramManager
 	
 	def __init__(
 			self,
 			ship_repo: ShipRepository,
-			subroutine_factory: SubroutineFactory,
 			weapon_repo: WeaponRepository,
 			ammo_repo: AmmunitionRepository,
-			ship_validator: ShipValidator
+			ship_validator: ShipValidator,
+			program_manager: ProgramManager
 	):
 		self.ship_repo = ship_repo
-		self.subroutine_factory = subroutine_factory
 		self.weapon_repo = weapon_repo
 		self.ammo_repo = ammo_repo
 		self.ship_validator = ship_validator
+		self.program_manager = program_manager
 	
 	def load_ship(self, ship_id: int) -> Ship:
 		ship_model = self.ship_repo.find_by_id(ship_id)
@@ -74,11 +74,19 @@ class ShipManager:
 		
 		self.ship_validator.validate_ship(ship_model)
 		
-		subroutines = self.subroutine_factory.build_models(decoded_ship['subroutines'])
+		if self.program_manager.build_models(decoded_ship['program']) is not None:
+			decoded_program = self.program_manager.build_models(decoded_ship['program'])
+		else:
+			decoded_program = None
 		
 		try:
+			if decoded_program is not None:
+				self.program_manager.save_program(decoded_program, ship_model.character_id)
+				ship_model.program_id = decoded_program['program'].program_id
+			else:
+				ship_model.program_id = None
+			
 			self.ship_repo.save_ship(ship_model, weapon_models, ammo_models)
-			self.subroutine_factory.save_subroutines(subroutines, ship_model.ship_id)
 		except Exception as err:
 			raise FailedToSaveException(err.__str__())
 	
@@ -102,6 +110,9 @@ class ShipManager:
 		for ammo_model in ammo_models:
 			ship.ammunitions.append(Ammunition(ammo_model))
 		
-		ship.subroutines = self.subroutine_factory.build_subroutines_for_ship(ship_model.ship_id)
+		if ship_model.program is not None:
+			ship.program = self.program_manager.load_program(ship_model.program.program_id)
+		else:
+			ship.program = None
 		
 		return ship

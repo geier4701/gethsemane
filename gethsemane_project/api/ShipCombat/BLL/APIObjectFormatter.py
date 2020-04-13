@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List, Dict, Union
 
 from api.ShipCombat.Exceptions.UnableToFormatException import UnableToFormatException
 from api.ShipCombat.Models.Components.Ammunition import Ammunition
@@ -10,6 +10,7 @@ from api.ShipCombat.Models.Components.JumpDrive import JumpDrive
 from api.ShipCombat.Models.Components.Radar import Radar
 from api.ShipCombat.Models.Components.Weapon import Weapon
 from api.ShipCombat.Models.Coordinates import Coordinates
+from api.ShipCombat.Models.Program import Program
 from api.ShipCombat.Models.Ship import Ship
 from api.ShipCombat.Models.ShipType import ShipType
 from api.ShipCombat.Models.Subroutines.Actions.Action import Action
@@ -178,6 +179,24 @@ def format_subroutines(subroutines: List[Subroutine]) -> List[Dict]:
 	return formatted_subroutines
 
 
+def format_program(program: Program = None) -> Union[Dict, None]:
+	if Program is not None:
+		formatted_program = {
+			"program_id": program.program_id,
+			"subroutines": format_subroutines(program.subroutines)
+		}
+		return formatted_program
+	else:
+		return None
+
+
+def format_programs(programs: List[Program]) -> List[Dict]:
+	formatted_programs = []
+	for program in programs:
+		formatted_programs.append(format_program(program))
+	return formatted_programs
+
+
 def format_ship(ship: Ship) -> Dict:
 	formatted_ship = {
 		"ship_id": ship.ship_id,
@@ -188,7 +207,7 @@ def format_ship(ship: Ship) -> Dict:
 		"ship_class": format_ship_class(ship.ship_class),
 		"weapons": format_components({"weapon": ship.armament}),
 		"ammunitions": format_components({"ammunition": ship.ammunitions}),
-		"subroutines": format_subroutines(ship.subroutines)
+		"program": format_program(ship.program)
 	}
 	return formatted_ship
 

@@ -15,6 +15,7 @@ from api.ShipCombat.Models.Subroutines.Conditions.IsDisabled import IsDisabled
 from api.ShipCombat.Models.Subroutines.Subroutine import Subroutine
 from api.ShipCombat.Repos.ActionRepository import ActionRepository
 from api.ShipCombat.Repos.ConditionRepository import ConditionRepository
+from api.ShipCombat.Repos.ProgramRepository import ProgramRepository
 from api.ShipCombat.Repos.SubroutineRepository import SubroutineRepository
 from api.models import ConditionModel, ActionModel, SubroutineModel
 
@@ -23,16 +24,19 @@ class SubroutineFactory:
 	subroutine_repo: SubroutineRepository
 	condition_repo: ConditionRepository
 	action_repo: ActionRepository
+	program_repo: ProgramRepository
 	
 	def __init__(
 			self,
 			subroutine_repo: SubroutineRepository,
 			condition_repo: ConditionRepository,
-			action_repo: ActionRepository
+			action_repo: ActionRepository,
+			program_repo: ProgramRepository
 	):
 		self.subroutine_repo = subroutine_repo
 		self.condition_repo = condition_repo
 		self.action_repo = action_repo
+		self.program_repo = program_repo
 	
 	# ACTIONS
 	def __build_attempt_repairs(self, action_model: ActionModel):
@@ -87,9 +91,9 @@ class SubroutineFactory:
 		IsDisabled.name: __build_is_disabled
 	}
 	
-	def build_subroutines_for_ship(self, ship_id: int) -> List[Subroutine]:
+	def build_for_program(self, program_id: int) -> List[Subroutine]:
 		subroutines = []
-		subroutine_models = self.subroutine_repo.find_by_ship_id(ship_id)
+		subroutine_models = self.subroutine_repo.find_by_program_id(program_id)
 		
 		for subroutine_model in subroutine_models:
 			actions = []
@@ -114,7 +118,7 @@ class SubroutineFactory:
 		for subroutine in decoded_subroutines:
 			subroutine_model = SubroutineModel()
 			subroutine_model.priority = subroutine['priority']
-			subroutine.ship_id = subroutine['ship_id']
+			subroutine.program_id = subroutine['program_id']
 			
 			condition_models = []
 			for condition in subroutine['conditions']:
@@ -141,14 +145,14 @@ class SubroutineFactory:
 		
 		return subroutines
 	
-	def save_subroutines(self, subroutines: List[Dict], ship_id: int) -> None:
-		old_subroutines = self.subroutine_repo.find_by_ship_id(ship_id)
+	def save_subroutines(self, subroutines: List[Dict], program_id: int) -> None:
+		old_subroutines = self.subroutine_repo.find_by_program_id(program_id)
 		for old_sub in old_subroutines:
 			self.subroutine_repo.delete(old_sub)
 		
 		for full_subroutine in subroutines:
 			subroutine_model = full_subroutine['subroutine_model']
-			subroutine_model.ship_id = ship_id
+			subroutine_model.program_id = program_id
 			self.subroutine_repo.save(subroutine_model)
 			
 			for condition_model in full_subroutine['condition_models']:

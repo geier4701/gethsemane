@@ -92,6 +92,11 @@ class ComputerModel(models.Model):
 	characters = models.ManyToManyField(CharacterModel)
 
 
+class ProgramModel(models.Model):
+	program_id = models.AutoField(primary_key=True, unique=True)
+	character = models.ForeignKey(CharacterModel, on_delete=models.CASCADE)
+
+
 class ShipModel(models.Model):
 	ship_id = models.AutoField(primary_key=True, unique=True)
 	name = models.CharField(max_length=100)
@@ -103,12 +108,12 @@ class ShipModel(models.Model):
 	weapons = models.ManyToManyField(WeaponModel)
 	ammunitions = models.ManyToManyField(AmmunitionModel)
 	character = models.ForeignKey(CharacterModel, on_delete=models.CASCADE)
+	program = models.ForeignKey(ProgramModel, blank=True, null=True, on_delete=models.SET_NULL)
 
 
-# TODO: Attach a subroutine to a profile and a profile to a ship instead of a subroutine to a ship
 class SubroutineModel(models.Model):
 	subroutine_id = models.AutoField(primary_key=True, unique=True)
-	ship = models.ForeignKey(ShipModel, on_delete=models.CASCADE)
+	program = models.ForeignKey(ProgramModel, on_delete=models.CASCADE)
 	priority = models.IntegerField()
 
 

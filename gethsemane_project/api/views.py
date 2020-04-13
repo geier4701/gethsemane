@@ -13,21 +13,31 @@ def linktest(request: HttpRequest):
 
 
 @require_http_methods(["GET"])
-def loadship(request: HttpRequest, ship_id: int):
+def getship(request: HttpRequest, ship_id: int):
 	ship_manager = ManagerFactory.create_ship_manager_default()
 	ship = ship_manager.load_ship(ship_id)
 	return JsonResponse(APIObjectFormatter.format_ship(ship))
 
 
 @require_http_methods(["GET"])
-def loadships(request: HttpRequest, character_id: int):
+def getships(request: HttpRequest, character_id: int):
 	ship_manager = ManagerFactory.create_ship_manager_default()
 	ships = ship_manager.load_ships_by_character_id(character_id)
 	return JsonResponse(APIObjectFormatter.format_ships(ships))
 
 
+@require_http_methods(["POST"])
+def saveship(request: HttpRequest, character_id: int):
+	ship_manager = ManagerFactory.create_ship_manager_default()
+	try:
+		ship_manager.create_or_update_ship(request.body, character_id)
+		return HttpResponse().status_code(200)
+	except Exception as err:
+		return HttpResponse("Request failed: " + err.__str__())
+
+
 @require_http_methods(["GET"])
-def loadcomponents(request: HttpRequest, character_id: int):
+def getcomponents(request: HttpRequest, character_id: int):
 	component_manager = ManagerFactory.create_component_manager_default()
 	components = component_manager.load_by_character_id(character_id)
 	return JsonResponse(APIObjectFormatter.format_components(components))
@@ -50,11 +60,25 @@ def getshipclasses(request: HttpRequest, character_id: int):
 	return JsonResponse(APIObjectFormatter.format_ship_classes(ship_classes))
 
 
+@require_http_methods(["GET"])
+def getprogram(request: HttpRequest, program_id: int):
+	program_manager = ManagerFactory.create_program_manager_default()
+	program = program_manager.load_program(program_id)
+	return JsonResponse(APIObjectFormatter.format_program(program))
+
+
+@require_http_methods(["GET"])
+def getprograms(request: HttpRequest, character_id: int):
+	program_manager = ManagerFactory.create_program_manager_default()
+	programs = program_manager.load_programs_by_character(character_id)
+	return JsonResponse(APIObjectFormatter.format_programs(programs))
+
+
 @require_http_methods(["POST"])
-def saveship(request: HttpRequest, character_id: int):
-	ship_manager = ManagerFactory.create_ship_manager_default()
+def saveprogram(request: HttpRequest, character_id: int):
+	program_manager = ManagerFactory.create_program_manager_default()
 	try:
-		ship_manager.create_or_update_ship(request.body, character_id)
+		program_manager.save_program(request.body, character_id)
 		return HttpResponse().status_code(200)
 	except Exception as err:
 		return HttpResponse("Request failed: " + err.__str__())

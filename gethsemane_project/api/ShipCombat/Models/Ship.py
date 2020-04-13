@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 
 from api.ShipCombat.Models.Coordinates import Coordinates
 from api.ShipCombat.Models.AttackInfo import AttackInfo
@@ -8,6 +8,7 @@ from api.ShipCombat.Models.Components.ImpulseEngine import ImpulseEngine
 from api.ShipCombat.Models.Components.JumpDrive import JumpDrive
 from api.ShipCombat.Models.Components.Radar import Radar
 from api.ShipCombat.Models.Components.Weapon import Weapon
+from api.ShipCombat.Models.Program import Program
 from api.ShipCombat.Models.ShipType import ShipType
 from api.ShipCombat.Models.Subroutines.Actions.Action import Action
 from api.ShipCombat.Models.Subroutines.Actions.AttemptRepairs import AttemptRepairs
@@ -17,7 +18,6 @@ from api.ShipCombat.Models.Subroutines.Actions.FireWeapon import FireWeapon
 from api.ShipCombat.Models.Subroutines.Actions.Jump import Jump
 from api.ShipCombat.Models.Subroutines.Actions.Scan import Scan
 from api.ShipCombat.Models.Subroutines.Conditions.Condition import Condition
-from api.ShipCombat.Models.Subroutines.Subroutine import Subroutine
 
 
 class Ship:
@@ -25,7 +25,7 @@ class Ship:
 	ship_class: ShipType
 	armament: List[Weapon]
 	ammunitions: List[Ammunition]
-	subroutines: List[Subroutine]
+	program: Union[Program, None]
 	radar: Radar
 	jump_drive: JumpDrive
 	impulse_engine: ImpulseEngine

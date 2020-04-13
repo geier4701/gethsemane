@@ -1,4 +1,5 @@
 from api.ShipCombat.BLL.ComponentManager import ComponentManager
+from api.ShipCombat.BLL.ProgramManager import ProgramManager
 from api.ShipCombat.BLL.ShipTypeManager import ShipTypeManager
 from api.ShipCombat.BLL.ShipManager import ShipManager
 from api.ShipCombat.BLL.ShipValidator import ShipValidator
@@ -10,6 +11,7 @@ from api.ShipCombat.Repos.ComputerRepository import ComputerRepository
 from api.ShipCombat.Repos.ConditionRepository import ConditionRepository
 from api.ShipCombat.Repos.ImpulseEngineRepository import ImpulseEngineRepository
 from api.ShipCombat.Repos.JumpDriveRepository import JumpDriveRepository
+from api.ShipCombat.Repos.ProgramRepository import ProgramRepository
 from api.ShipCombat.Repos.RadarRepository import RadarRepository
 from api.ShipCombat.Repos.ShipRepository import ShipRepository
 from api.ShipCombat.Repos.ShipTypeRepository import ShipTypeRepository
@@ -22,14 +24,10 @@ class ManagerFactory:
 	def create_ship_manager_default() -> ShipManager:
 		return ShipManager(
 			ShipRepository(),
-			SubroutineFactory(
-				SubroutineRepository(),
-				ConditionRepository(),
-				ActionRepository()
-			),
 			WeaponRepository(),
 			AmmunitionRepository(),
-			ShipValidator()
+			ShipValidator(),
+			ManagerFactory.create_program_manager_default()
 		)
 	
 	@staticmethod
@@ -47,3 +45,16 @@ class ManagerFactory:
 	@staticmethod
 	def create_ship_class_manager_default() -> ShipTypeManager:
 		return ShipTypeManager(ShipTypeRepository())
+	
+	
+	@staticmethod
+	def create_program_manager_default() -> ProgramManager:
+		return ProgramManager(
+				ProgramRepository(),
+				SubroutineFactory(
+					SubroutineRepository(),
+					ConditionRepository(),
+					ActionRepository(),
+					ProgramRepository()
+				)
+			)

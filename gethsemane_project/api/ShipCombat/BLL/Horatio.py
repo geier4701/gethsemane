@@ -24,9 +24,9 @@ class Horatio:
 		self.battle_recorder = battle_recorder
 	
 	def command(self):
-		self.own_ship.subroutines.sort(key=lambda sub: sub.priority)
+		self.own_ship.program.subroutines.sort(key=lambda sub: sub.priority)
 		actions_to_take = []
-		for subroutine in self.own_ship.subroutines:
+		for subroutine in self.own_ship.program.subroutines:
 			make_it_so = True
 			for condition in subroutine.conditions:
 				if not self.test_condition(condition):
