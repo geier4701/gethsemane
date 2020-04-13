@@ -94,6 +94,7 @@ class ComputerModel(models.Model):
 
 class ProgramModel(models.Model):
 	program_id = models.AutoField(primary_key=True, unique=True)
+	name = models.CharField(max_length=100)
 	character = models.ForeignKey(CharacterModel, on_delete=models.CASCADE)
 
 
@@ -104,6 +105,7 @@ class ShipModel(models.Model):
 	jump_drive = models.ForeignKey(JumpDriveModel, on_delete=models.CASCADE)
 	impulse_engine = models.ForeignKey(ImpulseEngineModel, on_delete=models.CASCADE)
 	computer = models.ForeignKey(ComputerModel, on_delete=models.CASCADE)
+	armour = models.ForeignKey(ArmourModel, on_delete=models.CASCADE)
 	ship_type = models.ForeignKey(ShipTypeModel, on_delete=models.CASCADE)
 	weapons = models.ManyToManyField(WeaponModel)
 	ammunitions = models.ManyToManyField(AmmunitionModel)
@@ -132,4 +134,3 @@ class ActionModel(models.Model):
 	name = models.CharField(max_length=100, choices=[('AR', 'AttemptRepairs'), ('DE', 'Delay'), ('FI', 'FireImpulse'), ('FW', 'FireWeapon'), ('JU', 'Jump'), ('SC', 'Scan')])
 	subroutine = models.ForeignKey(SubroutineModel, on_delete=models.CASCADE)
 	component_name = models.CharField(max_length=100, blank=True, null=True)
-	ammunition_name = models.CharField(max_length=100, blank=True, null=True)

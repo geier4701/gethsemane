@@ -1,5 +1,6 @@
 from typing import List, Union
 
+from api.ShipCombat.Models.Components.Armour import Armour
 from api.ShipCombat.Models.Coordinates import Coordinates
 from api.ShipCombat.Models.AttackInfo import AttackInfo
 from api.ShipCombat.Models.Components.Ammunition import Ammunition
@@ -30,6 +31,7 @@ class Ship:
 	jump_drive: JumpDrive
 	impulse_engine: ImpulseEngine
 	computer: Computer
+	armour: Armour
 	coordinates: Coordinates
 	current_energy: int
 	name: str

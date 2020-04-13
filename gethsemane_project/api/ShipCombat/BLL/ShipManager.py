@@ -5,6 +5,7 @@ from api.ShipCombat.BLL.ProgramManager import ProgramManager
 from api.ShipCombat.BLL.ShipValidator import ShipValidator
 from api.ShipCombat.Exceptions.FailedToSaveException import FailedToSaveException
 from api.ShipCombat.Models.Components.Ammunition import Ammunition
+from api.ShipCombat.Models.Components.Armour import Armour
 from api.ShipCombat.Models.Components.Computer import Computer
 from api.ShipCombat.Models.Components.ImpulseEngine import ImpulseEngine
 from api.ShipCombat.Models.Components.JumpDrive import JumpDrive
@@ -62,6 +63,7 @@ class ShipManager:
 		ship_model.jump_drive_id = decoded_ship['jump_drive_id']
 		ship_model.impulse_engine_id = decoded_ship['impulse_engine_id']
 		ship_model.computer_id = decoded_ship['computer_id']
+		ship_model.armour_id = decoded_ship['armour_id']
 		ship_model.ship_type_id = decoded_ship['ship_class_id']
 		
 		weapon_models = []
@@ -99,6 +101,7 @@ class ShipManager:
 		ship.jump_drive = JumpDrive(ship_model.jump_drive)
 		ship.impulse_engine = ImpulseEngine(ship_model.impulse_engine)
 		ship.computer = Computer(ship_model.computer)
+		ship.armour = Armour(ship_model.armour)
 		
 		weapon_models: List[WeaponModel]
 		weapon_models = self.weapon_repo.find_by_ship_id(ship_model.ship_id)

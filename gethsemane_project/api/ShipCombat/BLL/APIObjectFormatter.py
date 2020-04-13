@@ -98,6 +98,7 @@ def format_components(components: Dict[str, List[Component]]) -> List[Dict]:
 
 def format_condition(condition: Condition) -> Dict:
 	formatted_condition = {
+		"name": condition.name,
 		"at_least": condition.at_least,
 		"at_most": condition.at_most,
 		"target": condition.target.name
@@ -148,7 +149,6 @@ def format_action(action: Action) -> Dict:
 	elif action.name is FireWeapon.name:
 		action: FireWeapon
 		formatted_action["weapon_name"] = action.weapon_name
-		formatted_action["ammunition_name"] = action.ammunition_name
 	elif action.name is Jump.name:
 		action: Jump
 		formatted_action["distance_from_enemy"] = action.distance_from_enemy
@@ -183,6 +183,7 @@ def format_program(program: Program = None) -> Union[Dict, None]:
 	if Program is not None:
 		formatted_program = {
 			"program_id": program.program_id,
+			"name": program.name,
 			"subroutines": format_subroutines(program.subroutines)
 		}
 		return formatted_program
@@ -204,6 +205,7 @@ def format_ship(ship: Ship) -> Dict:
 		"jump_drive": format_component("jump_drive", ship.jump_drive),
 		"impulse_engine": format_component("impulse_engine", ship.impulse_engine),
 		"computer": format_component("computer", ship.computer),
+		"armour": format_component("armour", ship.armour),
 		"ship_class": format_ship_class(ship.ship_class),
 		"weapons": format_components({"weapon": ship.armament}),
 		"ammunitions": format_components({"ammunition": ship.ammunitions}),

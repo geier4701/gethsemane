@@ -15,19 +15,21 @@ class ProgramManager:
 		self.subroutine_factory = subroutine_factory
 	
 	def load_program(self, program_id: int) -> Program:
+		program = self.program_repo.find_by_id(program_id)
 		subroutines = self.subroutine_factory.build_for_program(program_id)
-		return Program(program_id, subroutines)
+		return Program(program_id, program.name, subroutines)
 	
 	def load_programs_by_character(self, character_id) -> List[Program]:
 		programs = []
 		program_models = self.program_repo.find_by_character_id(character_id)
 		for program_model in program_models:
 			subroutines = self.subroutine_factory.build_for_program(program_model.program_id)
-			programs.append(Program(program_model.program_id, subroutines))
+			programs.append(Program(program_model.program_id, program_model.name, subroutines))
 		return programs
 	
 	def build_models(self, decoded_program: Dict) -> Dict[str, Union[ProgramModel, List[dict]]]:
 		program_model = ProgramModel()
+		program_model.name = decoded_program['name']
 		program_model.character_id = decoded_program['character_id']
 		return {
 			'program': program_model,
@@ -35,9 +37,9 @@ class ProgramManager:
 		}
 	
 	def save_program(self, program_request: Dict, character_id: int) -> None:
-		program = program_request['program']
 		program_model = ProgramModel()
-		program_model.program_id = program['program_id']
+		program_model.program_id = program_request['program_id']
+		program_model.name = program_request['name']
 		program_model.character_id = character_id
 		self.program_repo.save(program_model)
 		self.subroutine_factory.save_subroutines(program_request['subroutines'], program_model.program_id)

@@ -50,7 +50,7 @@ class SubroutineFactory:
 		return FireImpulse(action_model.action_id, Coordinates(0, 0, 0, int(split_coords[0]), int(split_coords[1]), int(split_coords[2])))
 	
 	def __build_fire_weapon(self, action_model: ActionModel):
-		return FireWeapon(action_model.action_id, action_model.component_name, action_model.ammunition_name)
+		return FireWeapon(action_model.action_id, action_model.component_name)
 	
 	def __build_jump(self, action_model: ActionModel):
 		return Jump(action_model.action_id, int(action_model.component_name))
@@ -134,7 +134,6 @@ class SubroutineFactory:
 				action_model = ActionModel()
 				action_model.name = action['name']
 				action_model.component_name = action['component_name']
-				action_model.ammunition_name = action['ammunition_name']
 				action_models.append(action_model)
 			
 			subroutines.append({
@@ -151,14 +150,24 @@ class SubroutineFactory:
 			self.subroutine_repo.delete(old_sub)
 		
 		for full_subroutine in subroutines:
-			subroutine_model = full_subroutine['subroutine_model']
+			subroutine_model = SubroutineModel()
+			subroutine_model.priority = full_subroutine['priority']
 			subroutine_model.program_id = program_id
 			self.subroutine_repo.save(subroutine_model)
 			
-			for condition_model in full_subroutine['condition_models']:
+			for condition in full_subroutine['conditions']:
+				condition_model = ConditionModel()
+				condition_model.name = condition['name']
+				condition_model.at_least = condition['at_least']
+				condition_model.at_most = condition['at_most']
+				condition_model.target = condition['target']
+				condition_model.component_name = condition['component_name']
 				condition_model.subroutine_id = subroutine_model.subroutine_id
 				self.condition_repo.save(condition_model)
 			
-			for action_model in full_subroutine['action_models']:
+			for action in full_subroutine['actions']:
+				action_model = ActionModel()
+				action_model.name = action['name']
+				action_model.component_name = action['component_name']
 				action_model.subroutine_id = subroutine_model.subroutine_id
 				self.action_repo.save(action_model)

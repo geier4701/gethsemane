@@ -14,6 +14,3 @@ class ImpulseEngine(Component):
 		self.repair_cost = model.repair_cost
 		self.max_accel = model.max_accel
 		self.operational = True
-
-# POSSIBLE ALTERNATIVE: No batteries, only a generation amount. You get your power
-# every turn and that's it, with no way to store it for later

@@ -1,3 +1,5 @@
+import json
+
 from django.http import HttpResponse, JsonResponse, HttpRequest
 from django.views.decorators.http import require_http_methods
 
@@ -78,7 +80,7 @@ def getprograms(request: HttpRequest, character_id: int):
 def saveprogram(request: HttpRequest, character_id: int):
 	program_manager = ManagerFactory.create_program_manager_default()
 	try:
-		program_manager.save_program(request.body, character_id)
+		program_manager.save_program(json.loads(request.body), character_id)
 		return HttpResponse().status_code(200)
 	except Exception as err:
 		return HttpResponse("Request failed: " + err.__str__())
