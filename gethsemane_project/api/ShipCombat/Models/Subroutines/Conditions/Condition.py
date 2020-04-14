@@ -12,6 +12,7 @@ class Target(IntEnum):
 
 
 class Condition(ABC):
+	condition_id: int
 	at_least: Optional[int]
 	at_most: Optional[int]
 	target: Target

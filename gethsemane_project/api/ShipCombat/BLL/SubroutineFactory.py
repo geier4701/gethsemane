@@ -60,19 +60,19 @@ class SubroutineFactory:
 	
 	# CONDITIONS
 	def __build_ammunition_level(self, condition_model: ConditionModel):
-		return AmmunitionLevel(condition_model.at_least, condition_model.at_most, condition_model.component_name)
+		return AmmunitionLevel(condition_model.condition_id, condition_model.at_least, condition_model.at_most, condition_model.component_name)
 	
 	def __build_distance(self, condition_model: ConditionModel):
-		return Distance(condition_model.at_least, condition_model.at_most)
+		return Distance(condition_model.condition_id, condition_model.at_least, condition_model.at_most)
 	
 	def __build_energy_level(self, condition_model: ConditionModel):
-		return EnergyLevel(condition_model.at_least, condition_model.at_most, condition_model.target)
+		return EnergyLevel(condition_model.condition_id, condition_model.at_least, condition_model.at_most, condition_model.target)
 	
 	def __build_health(self, condition_model: ConditionModel):
-		return Health(condition_model.at_least, condition_model.at_most, condition_model.target)
+		return Health(condition_model.condition_id, condition_model.at_least, condition_model.at_most, condition_model.target)
 	
 	def __build_is_disabled(self, condition_model: ConditionModel):
-		return IsDisabled(0, 0, condition_model.target, condition_model.component_name)
+		return IsDisabled(condition_model.condition_id, 0, 0, condition_model.target, condition_model.component_name)
 	
 	__action_map = {
 		AttemptRepairs.name: __build_attempt_repairs,
@@ -157,6 +157,7 @@ class SubroutineFactory:
 			
 			for condition in full_subroutine['conditions']:
 				condition_model = ConditionModel()
+				condition_model.condition_id = condition['condition_id']
 				condition_model.name = condition['name']
 				condition_model.at_least = condition['at_least']
 				condition_model.at_most = condition['at_most']
@@ -167,6 +168,7 @@ class SubroutineFactory:
 			
 			for action in full_subroutine['actions']:
 				action_model = ActionModel()
+				action_model.action_id = action['action_id']
 				action_model.name = action['name']
 				action_model.component_name = action['component_name']
 				action_model.subroutine_id = subroutine_model.subroutine_id

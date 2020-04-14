@@ -4,7 +4,8 @@ from api.ShipCombat.Models.Subroutines.Conditions.Condition import Condition, Ta
 class EnergyLevel(Condition):
 	name = 'EnergyLevel'
 	
-	def __init__(self, at_least: int, at_most: int, target: Target):
+	def __init__(self, condition_id: int, at_least: int, at_most: int, target: Target):
+		self.condition_id = condition_id
 		self.at_least = at_least
 		self.at_most = at_most
 		self.target = target

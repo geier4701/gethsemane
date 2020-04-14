@@ -98,6 +98,7 @@ def format_components(components: Dict[str, List[Component]]) -> List[Dict]:
 
 def format_condition(condition: Condition) -> Dict:
 	formatted_condition = {
+		"condition_id": condition.condition_id,
 		"name": condition.name,
 		"at_least": condition.at_least,
 		"at_most": condition.at_most,
@@ -201,6 +202,7 @@ def format_programs(programs: List[Program]) -> List[Dict]:
 def format_ship(ship: Ship) -> Dict:
 	formatted_ship = {
 		"ship_id": ship.ship_id,
+		"name": ship.name,
 		"radar": format_component("radar", ship.radar),
 		"jump_drive": format_component("jump_drive", ship.jump_drive),
 		"impulse_engine": format_component("impulse_engine", ship.impulse_engine),
